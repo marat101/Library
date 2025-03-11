@@ -42,11 +42,13 @@ android {
 
 dependencies {
 
+    // Modules
+    implementation(projects.coreDi)
     implementation(projects.featureRoot.api)
     implementation(projects.featureRoot.impl)
 
     implementation(libs.dagger)
-    implementation(libs.dagger.compiler)
+    kapt(libs.dagger.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
