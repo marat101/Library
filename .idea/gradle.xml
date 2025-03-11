@@ -14,6 +14,7 @@
             <option value="$PROJECT_DIR$/feature_root" />
             <option value="$PROJECT_DIR$/feature_root/api" />
             <option value="$PROJECT_DIR$/feature_root/impl" />
+            <option value="$PROJECT_DIR$/navigation_api" />
           </set>
         </option>
         <option name="resolveExternalAnnotations" value="false" />

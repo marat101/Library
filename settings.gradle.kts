@@ -26,4 +26,5 @@ include(":app")
 include(":feature_root")
 include(":feature_root:api")
 include(":feature_root:impl")
+include(":navigation_api")
  
