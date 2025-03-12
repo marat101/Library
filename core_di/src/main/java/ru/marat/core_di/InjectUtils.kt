@@ -1,18 +1,22 @@
 package ru.marat.core_di
 
-import android.content.Context
-
 object InjectUtils {
 
-    private var _appComponent: AppComponent? = null
+    private var _baseComponent: BaseComponent? = null
+
+    val baseComponent: BaseComponent
+        get() = _baseComponent ?: throw IllegalStateException("BaseComponent is not provided")
+
+    fun provideAppComponent(component: BaseComponent) {
+        if (_baseComponent == null) _baseComponent = component
+        else throw IllegalStateException("BaseComponent is already provided")
+    }
+
+    inline fun <reified T> appDependencies(): T {
+        if (baseComponent !is T)
+            throw IllegalAccessException("AppComponent must implementation ${T::class.java.simpleName}")
 
 
-    val appComponent: AppComponent
-        get() = _appComponent ?: throw IllegalStateException("AppComponent is not provided")
-
-    fun provideAppComponent(appContext: Context) {
-        if (_appComponent == null)
-            _appComponent = DaggerAppComponent.factory().create(appContext)
-        else throw IllegalStateException("AppComponent is already provided")
+        return baseComponent as (T & Any)
     }
 }

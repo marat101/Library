@@ -24,9 +24,14 @@ enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 rootProject.name = "Library"
 include(":app")
 
+include(":navigation_api")
+include(":core_di")
+
 include(":feature_root:api")
 include(":feature_root:impl")
 
-include(":navigation_api")
+include(":feature_home:api")
+include(":feature_home:impl")
 
-include(":core_di")
+include(":feature_profile:api")
+include(":feature_profile:impl")

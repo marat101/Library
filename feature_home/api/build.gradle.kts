@@ -1,13 +1,11 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "ru.marat.navigation_api"
+    namespace = "ru.marat.feature_home"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     lint {
@@ -25,19 +23,11 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
-    buildFeatures {
-        compose = true
-    }
 }
 
 dependencies {
 
-    implementation(libs.dagger)
-    kapt(libs.dagger.compiler)
+    api(projects.navigationApi)
 
     implementation(libs.kotlinx.serialization.json)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.navigation)
 }

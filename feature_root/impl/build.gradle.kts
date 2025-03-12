@@ -32,6 +32,13 @@ android {
 
 dependencies {
 
+    implementation(projects.coreDi)
+    implementation(projects.featureHome.api)
+    implementation(projects.featureRoot.api)
+    implementation(projects.featureProfile.api)
+
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
@@ -43,6 +50,7 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.androidx.navigation)
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }

@@ -12,6 +12,12 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core_di" />
+            <option value="$PROJECT_DIR$/feature_home" />
+            <option value="$PROJECT_DIR$/feature_home/api" />
+            <option value="$PROJECT_DIR$/feature_home/impl" />
+            <option value="$PROJECT_DIR$/feature_profile" />
+            <option value="$PROJECT_DIR$/feature_profile/api" />
+            <option value="$PROJECT_DIR$/feature_profile/impl" />
             <option value="$PROJECT_DIR$/feature_root" />
             <option value="$PROJECT_DIR$/feature_root/api" />
             <option value="$PROJECT_DIR$/feature_root/impl" />

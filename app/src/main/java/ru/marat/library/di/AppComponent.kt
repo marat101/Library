@@ -1,19 +1,16 @@
-package ru.marat.core_di
+package ru.marat.library.di
 
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import ru.marat.core_di.BaseComponent
 import javax.inject.Singleton
 
 @Singleton
-@Component
-interface AppComponent {
-
-//    @Component.Builder
-//    interface Builder {
-//        fun dependencies(@BindsInstance context: Context) : Builder
-//        fun build(): AppComponent
-//    }
+@Component(
+    modules = [AppModule::class]
+)
+interface AppComponent: BaseComponent, Dependencies {
 
     @Component.Factory
     interface Factory {
