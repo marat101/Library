@@ -27,7 +27,7 @@ android {
 
 dependencies {
 
-    api(projects.navigationApi)
+    api(projects.coreNavigation)
 
     implementation(libs.kotlinx.serialization.json)
 }

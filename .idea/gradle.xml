@@ -12,6 +12,8 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/core_di" />
+            <option value="$PROJECT_DIR$/core_navigation" />
+            <option value="$PROJECT_DIR$/core_ui" />
             <option value="$PROJECT_DIR$/feature_home" />
             <option value="$PROJECT_DIR$/feature_home/api" />
             <option value="$PROJECT_DIR$/feature_home/impl" />
@@ -21,10 +23,11 @@
             <option value="$PROJECT_DIR$/feature_root" />
             <option value="$PROJECT_DIR$/feature_root/api" />
             <option value="$PROJECT_DIR$/feature_root/impl" />
-            <option value="$PROJECT_DIR$/navigation_api" />
+            <option value="$PROJECT_DIR$/feature_search" />
+            <option value="$PROJECT_DIR$/feature_search/api" />
+            <option value="$PROJECT_DIR$/feature_search/impl" />
           </set>
         </option>
-        <option name="resolveExternalAnnotations" value="false" />
       </GradleProjectSettings>
     </option>
   </component>

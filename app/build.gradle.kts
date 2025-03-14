@@ -44,13 +44,15 @@ dependencies {
 
     // Modules
     implementation(projects.coreDi)
-    implementation(projects.navigationApi)
+    implementation(projects.coreNavigation)
     implementation(projects.featureRoot.api)
     implementation(projects.featureRoot.impl)
     implementation(projects.featureHome.api)
     implementation(projects.featureHome.impl)
     implementation(projects.featureProfile.api)
     implementation(projects.featureProfile.impl)
+    implementation(projects.featureSearch.api)
+    implementation(projects.featureSearch.impl)
 
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)

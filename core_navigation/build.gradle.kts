@@ -1,12 +1,13 @@
 plugins {
     alias(libs.plugins.android.library)
-    alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.kotlin.android)
+    alias(libs.plugins.kotlin.kapt)
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "ru.marat.feature_profile"
+    namespace = "ru.marat.core_navigation"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     lint {
@@ -32,10 +33,11 @@ android {
 
 dependencies {
 
-    api(projects.coreNavigation)
+    implementation(libs.dagger)
+    kapt(libs.dagger.compiler)
 
     implementation(libs.kotlinx.serialization.json)
-
     implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.compose.runtime)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.navigation)
 }

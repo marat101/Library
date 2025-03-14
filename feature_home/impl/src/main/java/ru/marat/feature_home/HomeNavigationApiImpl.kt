@@ -7,8 +7,6 @@ import androidx.navigation.compose.composable
 
 class HomeNavigationApiImpl: HomeNavigationApi {
 
-    override val route = HomeScreen
-
     override fun registerGraph(
         navGraphBuilder: NavGraphBuilder,
         navController: NavHostController,
@@ -17,6 +15,7 @@ class HomeNavigationApiImpl: HomeNavigationApi {
         navGraphBuilder.composable<HomeScreen> {
             HomeScreen(
                 modifier = modifier,
+                navController = navController
             )
         }
     }

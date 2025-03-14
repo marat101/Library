@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.marat.feature_profile"
+    namespace = "ru.marat.feature_search"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     lint {
@@ -23,10 +23,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-    }
-
-    buildFeatures {
-        compose = true
     }
 }
 

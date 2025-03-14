@@ -2,4 +2,4 @@ package ru.marat.feature_profile
 
 import ru.marat.navigation_api.NavigationApi
 
-interface ProfileNavigationApi: NavigationApi
+interface SearchNavigationApi: NavigationApi

@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.marat.feature_root"
+    namespace = "ru.marat.feature_root.api"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     lint {
@@ -26,5 +26,5 @@ android {
 
 dependencies {
 
-    api(projects.navigationApi)
+    api(projects.coreNavigation)
 }

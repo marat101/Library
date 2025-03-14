@@ -28,6 +28,8 @@ android {
 dependencies {
 
     implementation(projects.featureHome.api)
+    implementation(projects.featureSearch.api)
+
     implementation(platform(libs.androidx.compose.bom))
     implementation(libs.androidx.ui)
     implementation(libs.androidx.material3)
