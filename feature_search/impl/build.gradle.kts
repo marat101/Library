@@ -10,6 +10,10 @@ android {
     namespace = "ru.marat.feature_search"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
+    kapt {
+        generateStubs = true
+    }
+
     lint {
         targetSdk = libs.versions.targetSdk.get().toInt()
     }

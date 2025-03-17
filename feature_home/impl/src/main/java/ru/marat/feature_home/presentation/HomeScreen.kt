@@ -1,6 +1,5 @@
-package ru.marat.feature_home
+package ru.marat.feature_home.presentation
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.Button
@@ -10,17 +9,13 @@ import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.res.stringResource
-import androidx.navigation.NavController
-import kotlinx.coroutines.FlowPreview
-import ru.marat.feature_profile.SearchScreen
+import ru.marat.feature_home.di.daggerViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     modifier: Modifier = Modifier,
-    navController: NavController
+    viewModel: HomeViewModel = daggerViewModel()
 ) {
     Box(
         modifier = Modifier
@@ -35,9 +30,7 @@ fun HomeScreen(
             actions = {
                 Button(
                     onClick = {
-                        navController.navigate(SearchScreen) {
-                            launchSingleTop = true
-                        }
+                        viewModel.onSearchClick()
                     }
                 ) {
                     Text("Search")

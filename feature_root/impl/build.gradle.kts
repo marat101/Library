@@ -3,11 +3,16 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
     namespace = "ru.marat.feature_root"
     compileSdk = libs.versions.compileSdk.get().toInt()
+
+    kapt {
+        generateStubs = true
+    }
 
     lint {
         targetSdk = libs.versions.targetSdk.get().toInt()

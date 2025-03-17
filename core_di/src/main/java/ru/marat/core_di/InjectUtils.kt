@@ -3,7 +3,6 @@ package ru.marat.core_di
 object InjectUtils {
 
     private var _baseComponent: BaseComponent? = null
-
     val baseComponent: BaseComponent
         get() = _baseComponent ?: throw IllegalStateException("BaseComponent is not provided")
 
@@ -15,7 +14,6 @@ object InjectUtils {
     inline fun <reified T> appDependencies(): T {
         if (baseComponent !is T)
             throw IllegalAccessException("AppComponent must implementation ${T::class.java.simpleName}")
-
 
         return baseComponent as (T & Any)
     }

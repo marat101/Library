@@ -1,13 +1,20 @@
 package ru.marat.feature_root.di
 
-import dagger.Component
+import dagger.Subcomponent
 import ru.marat.feature_root.MainActivity
-import ru.marat.feature_root.NavigationApiProvider
+import javax.inject.Scope
 
-@Component(
-    dependencies = [RootDependencies::class],
-)
+@Scope
+@Retention(AnnotationRetention.RUNTIME)
+annotation class RootScope
+
+@Subcomponent
 interface RootComponent {
+
+    @Subcomponent.Factory
+    interface Factory {
+        fun create(): RootComponent
+    }
 
     fun inject(target: MainActivity)
 }

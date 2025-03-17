@@ -1,3 +1,8 @@
 package ru.marat.navigation_api
 
-interface Screen
+import kotlinx.serialization.Serializable
+
+@Serializable
+abstract class Screen {
+    abstract val root: Boolean
+}

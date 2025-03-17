@@ -44,6 +44,7 @@ dependencies {
 
     // Modules
     implementation(projects.coreDi)
+    implementation(projects.coreUi)
     implementation(projects.coreNavigation)
     implementation(projects.featureRoot.api)
     implementation(projects.featureRoot.impl)
@@ -54,17 +55,15 @@ dependencies {
     implementation(projects.featureSearch.api)
     implementation(projects.featureSearch.impl)
 
+    implementation(libs.kotlinx.serialization.json)
+
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
-    implementation(platform(libs.androidx.compose.bom))
-    implementation(libs.androidx.ui)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.ui.tooling.preview)
-    implementation(libs.androidx.material3)
+
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)

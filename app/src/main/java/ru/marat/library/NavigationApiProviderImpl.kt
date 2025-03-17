@@ -7,10 +7,11 @@ import ru.marat.feature_root.NavigationApiProvider
 import ru.marat.navigation_api.NavigationApi
 
 class NavigationApiProviderImpl: NavigationApiProvider {
-    override fun getAll(): Array<NavigationApi> =
-        arrayOf(
-            HomeNavigationApiImpl() ,
+    override fun getAll(): Array<NavigationApi> {
+        return arrayOf(
+            HomeNavigationApiImpl(),
             ProfileNavigationApiImpl(),
             SearchNavigationImpl()
         )
+    }
 }
