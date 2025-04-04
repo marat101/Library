@@ -1,4 +1,4 @@
-package ru.marat.library.ui.theme
+package ru.marat.core_ui.theme
 
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
@@ -8,10 +8,11 @@ val DarkColorScheme = darkColorScheme(
     primary = Color(0xFFD0BCFF),
     secondary = Color(0xFFCCC2DC),
     tertiary = Color(0xFFEFB8C8),
+    background = Color.Black
 )
 
 val LightColorScheme = lightColorScheme(
-    primary = Color(0xFF5061AF),
+    primary = Color(0xFF2541B9),
     secondary = Color(0xFF625b71),
     tertiary = Color(0xFF7D5260),
 

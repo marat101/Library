@@ -44,4 +44,5 @@ dependencies {
     implementation(libs.androidx.ui)
     implementation(libs.androidx.material3)
     implementation(libs.androidx.navigation)
+    implementation(libs.kotlinx.serialization.json)
 }
