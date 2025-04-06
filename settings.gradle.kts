@@ -39,3 +39,6 @@ include(":feature_profile:impl")
 
 include(":feature_search:api")
 include(":feature_search:impl")
+
+include(":feature_settings:api")
+include(":feature_settings:impl")

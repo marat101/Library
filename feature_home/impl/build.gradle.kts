@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.marat.feature_home"
+    namespace = "ru.marat.feature_home.impl"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     kapt {

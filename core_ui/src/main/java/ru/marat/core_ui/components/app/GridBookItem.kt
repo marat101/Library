@@ -1,6 +1,8 @@
 package ru.marat.core_ui.components.app
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,7 +20,10 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
+import androidx.compose.material3.ripple
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -41,7 +46,10 @@ fun GridBookItem(
     maxRating: Float = 5f,
     rating: Float = 0f,
     ratingState: RatingState = rememberRatingState(),
-    price: String
+    price: String,
+    isFavorite: Boolean,
+    onClick: () -> Unit = {},
+    onFavClick: (Boolean) -> Unit
 ) {
     val shape = RoundedCornerShape(8.dp)
     Column(
@@ -50,6 +58,11 @@ fun GridBookItem(
             .fillMaxWidth()
             .background(AppTheme.colorScheme.bookItemBackground)
             .then(modifier)
+            .clickable(
+                indication = ripple(),
+                interactionSource = remember { MutableInteractionSource() },
+                onClick = onClick
+            )
     ) {
         Box(
             modifier = Modifier
@@ -57,7 +70,14 @@ fun GridBookItem(
                 .aspectRatio(3f / 4f)
                 .background(Color.LightGray)
         ) {
-            //todo image and fav button
+            FavoriteButton(
+                modifier = Modifier
+                    .align(Alignment.TopEnd)
+                    .padding(8.dp),
+                isFavorite = isFavorite,
+                onFavoriteClick = onFavClick
+            )
+            // todo image and fav button
         }
 
         Column(
@@ -85,7 +105,7 @@ fun GridBookItem(
                 Rating(
                     modifier = Modifier
                         .height(15.dp)
-                        .aspectRatio(5f/1),
+                        .aspectRatio(5f / 1),
                     rating = rating,
                     state = ratingState,
                     maxRating = maxRating,
@@ -128,10 +148,13 @@ private fun GridBookItemLightPreview() {
             contentPadding = PaddingValues(16.dp)
         ) {
             items(count = 20) {
+                val isFavorite = remember { mutableStateOf(false) }
                 GridBookItem(
                     modifier = Modifier,
-                    title= "The Hidden Path",
-                    price = "10.22$"
+                    title = "The Hidden Path",
+                    price = "10.22$",
+                    isFavorite = isFavorite.value,
+                    onFavClick = { isFavorite.value = !isFavorite.value }
                 )
             }
         }
@@ -154,10 +177,13 @@ private fun GridBookItemDarkPreview() {
             contentPadding = PaddingValues(16.dp)
         ) {
             items(count = 20) {
+                val isFavorite = remember { mutableStateOf(false) }
                 GridBookItem(
                     modifier = Modifier,
-                    title= "The Hidden Path",
-                    price = "Бесплатно"
+                    title = "The Hidden Path",
+                    price = "Бесплатно",
+                    isFavorite = isFavorite.value,
+                    onFavClick = { isFavorite.value = !isFavorite.value }
                 )
             }
         }

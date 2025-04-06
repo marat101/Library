@@ -1,11 +1,12 @@
 [versions]
+coilCompose = "3.1.0"
 compileSdk = "35"
 ktorClientCore = "3.1.2"
 pagingCompose = "3.3.6"
 targetSdk = "35"
 minSdk = "26"
 
-agp = "8.8.2"
+agp = "8.9.1"
 kotlin = "2.1.10"
 coreKtx = "1.15.0"
 junit = "4.13.2"
@@ -24,6 +25,7 @@ pdfViewer = "1.0.0-alpha"
 
 # Tests
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
+coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }

@@ -55,6 +55,8 @@ dependencies {
     implementation(projects.featureProfile.impl)
     implementation(projects.featureSearch.api)
     implementation(projects.featureSearch.impl)
+    implementation(projects.featureSettings.api)
+    implementation(projects.featureSettings.impl)
 
     implementation(libs.kotlinx.serialization.json)
 

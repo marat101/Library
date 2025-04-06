@@ -15,10 +15,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import ru.marat.core_ui.components.app.GridBookItem
 import ru.marat.core_ui.components.common.rememberRatingState
+import ru.marat.feature_home.api.R
 import ru.marat.feature_home.di.daggerViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -36,7 +41,10 @@ fun HomeScreen(
         TopAppBar(
             modifier = Modifier.fillMaxWidth(),
             title = {
-                Text("Главная")
+                Text(
+                    text = stringResource(R.string.top_app_bar_screen_title),
+                    fontWeight = FontWeight.SemiBold
+                )
             },
             actions = {
                 Button(
@@ -58,12 +66,16 @@ fun HomeScreen(
             contentPadding = PaddingValues(16.dp)
         ) {
             items(count = 20) {
+                val isFavorite = remember { mutableStateOf(false) }
+                val rating = remember { (0.. 5).random().toFloat() +(1f/(0..9).random().toFloat()) }
                 GridBookItem(
                     modifier = Modifier,
                     title= "The Hidden Path",
-                    rating = (0.. 5).random().toFloat() +(1f/(0..9).random().toFloat()),
+                    rating = rating,
                     ratingState = ratingState,
-                    price = "22.43$"
+                    price = "22.43$",
+                    isFavorite = isFavorite.value,
+                    onFavClick = { isFavorite.value = !isFavorite.value }
                 )
             }
         }

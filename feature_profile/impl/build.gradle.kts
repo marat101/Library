@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.marat.feature_profile"
+    namespace = "ru.marat.feature_profile.impl"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     kapt {
@@ -37,12 +37,16 @@ android {
 
 dependencies {
 
+    implementation(projects.coreUi)
     implementation(projects.featureProfile.api)
+    implementation(projects.featureSettings.api)
 
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
 
     implementation(libs.kotlinx.serialization.json)
+
+    implementation(libs.coil.compose)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

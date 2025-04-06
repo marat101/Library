@@ -6,6 +6,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -56,8 +57,13 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             val navController = rememberNavController()
+            val systemIsDark = isSystemInDarkTheme()
+            val isDark = remember { mutableStateOf(systemIsDark) }
             appNavigation.init(navController)
-            LibraryTheme {
+            LibraryTheme(
+                darkTheme = isDark.value,
+                onThemeChange = { isDark.value = !isDark.value }
+            ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
@@ -87,9 +93,9 @@ class MainActivity : ComponentActivity() {
                             selectedButton = bottomBarState.value,
                             buttons = NavigationButton.entries,
                             onClick = {
-                                if (!listOf(
+                                if (!listOf( //todo
                                         HomeScreen::class.qualifiedName,
-                                        ProfileScreen::class.qualifiedName
+                                        ProfileScreen::class.qualifiedName,
                                     ).contains(navController.currentBackStackEntry?.destination?.route)
                                 ) return@BottomNavigationBar
                                 bottomBarState.value = it
@@ -110,12 +116,4 @@ class MainActivity : ComponentActivity() {
 
     private fun inject() =
         InjectUtils.appDependencies<RootDependencies>().component.create().inject(this)
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    LibraryTheme {
-
-    }
 }

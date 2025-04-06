@@ -4,6 +4,7 @@ import ru.marat.feature_home.HomeNavigationApiImpl
 import ru.marat.feature_profile.ProfileNavigationApiImpl
 import ru.marat.feature_profile.SearchNavigationImpl
 import ru.marat.feature_root.NavigationApiProvider
+import ru.marat.feature_settings.SettingsNavigationApiImpl
 import ru.marat.navigation_api.NavigationApi
 
 class NavigationApiProviderImpl: NavigationApiProvider {
@@ -11,7 +12,8 @@ class NavigationApiProviderImpl: NavigationApiProvider {
         return arrayOf(
             HomeNavigationApiImpl(),
             ProfileNavigationApiImpl(),
-            SearchNavigationImpl()
+            SearchNavigationImpl(),
+            SettingsNavigationApiImpl()
         )
     }
 }
