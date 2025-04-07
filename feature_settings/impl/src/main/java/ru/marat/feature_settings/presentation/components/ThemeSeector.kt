@@ -45,6 +45,7 @@ import androidx.compose.ui.util.fastForEach
 import com.turtleteam.ui.theme_animator.LocalThemeAnimator
 import ru.marat.core_ui.components.common.clickWithoutIndication
 import ru.marat.core_ui.theme.AppTheme
+import ru.marat.feature_settings.presentation.settings.SettingsViewModel
 import ru.marat.library.ui.theme.LibraryTheme
 import ru.marat.library.ui.theme.LocalTheme
 import ru.marat.library.ui.theme.Theme
@@ -52,7 +53,8 @@ import ru.marat.library.ui.theme.isDark
 
 @Composable
 fun ThemeSelector( //todo надо бы по-нормальному сделать
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    viewModel: SettingsViewModel,
 ) {
     val systemIsDark = isSystemInDarkTheme()
     val themeAnimator = LocalThemeAnimator.current
@@ -89,6 +91,7 @@ fun ThemeSelector( //todo надо бы по-нормальному сделат
                         translateX = (btnWidth + spacingPx) * offsetFraction(currentTheme.value),
                         translateY = 0f
                     )
+                    viewModel.onThemeChanged(it)
                     themeAnimator.changeTheme(
                         it,
                         RoundRect(buttonBounds, CornerRadius(cornerRadiusPx)),
@@ -256,43 +259,5 @@ private fun offsetFraction(theme: Theme): Float {
         Theme.SYSTEM -> 0f
         Theme.DARK -> 1f
         Theme.LIGHT -> 2f
-    }
-}
-
-@Preview
-@Composable
-fun ThemeSelectorLightPreview() {
-    LibraryTheme(
-        darkTheme = false
-    ) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.5f)
-                .padding(16.dp)
-        ) {
-            ThemeSelector(
-                modifier = Modifier.fillMaxWidth()
-            )
-        }
-    }
-}
-
-@Preview
-@Composable
-fun ThemeSelectorDarkPreview() {
-    LibraryTheme(
-        darkTheme = true
-    ) {
-        Box(
-            Modifier
-                .fillMaxWidth()
-                .fillMaxHeight(0.5f)
-                .padding(16.dp)
-        ) {
-            ThemeSelector(
-                modifier = Modifier.fillMaxWidth(),
-            )
-        }
     }
 }

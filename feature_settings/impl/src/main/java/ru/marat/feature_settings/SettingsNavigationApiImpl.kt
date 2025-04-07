@@ -17,7 +17,6 @@ class SettingsNavigationApiImpl: SettingsNavigationApi {
         navGraphBuilder.composable<SettingsScreens.Settings> {
             SettingsScreen(
                 modifier = modifier,
-                navController = navController
             )
         }
         navGraphBuilder.composable<SettingsScreens.Feedback> {

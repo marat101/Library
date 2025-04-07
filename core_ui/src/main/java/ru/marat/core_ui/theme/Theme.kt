@@ -7,12 +7,9 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.compositionLocalOf
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import com.turtleteam.ui.theme_animator.ThemeAnimator
 import ru.marat.core_ui.R
-import ru.marat.core_ui.theme.AppTheme
 import ru.marat.core_ui.theme.DarkColorScheme
 import ru.marat.core_ui.theme.LightColorScheme
 import ru.marat.core_ui.theme.appDarkColorScheme
@@ -23,13 +20,12 @@ val LocalTheme = compositionLocalOf { Theme.SYSTEM }
 
 @Composable
 fun LibraryTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
-    onThemeChange: () -> Unit = {},
+    currentTheme: Theme = Theme.LIGHT,
+//    onThemeChange: (Theme) -> Unit = {},
     content: @Composable () -> Unit
 ) {
-    val currentTheme = remember { mutableStateOf(Theme.SYSTEM) }
-    val darkTheme = when (currentTheme.value) {
-        Theme.SYSTEM -> darkTheme
+    val darkTheme = when (currentTheme) {
+        Theme.SYSTEM -> isSystemInDarkTheme()
         Theme.DARK -> true
         Theme.LIGHT -> false
     }
@@ -37,11 +33,11 @@ fun LibraryTheme(
     val appColorScheme = if (darkTheme) appDarkColorScheme else appLightColorScheme
     ThemeAnimator(
         modifier = Modifier.fillMaxSize(),
-        onThemeChange = { currentTheme.value = it }
+        onThemeChange = {}
     ) {
         CompositionLocalProvider(
             LocalColorScheme provides appColorScheme,
-            LocalTheme provides currentTheme.value
+            LocalTheme provides currentTheme
         ) {
             MaterialTheme(
                 colorScheme = colorScheme,
@@ -50,6 +46,19 @@ fun LibraryTheme(
             )
         }
     }
+}
+
+@Composable
+fun LibraryTheme(
+    darkTheme: Boolean = false,
+//    onThemeChange: (Theme) -> Unit = {},
+    content: @Composable () -> Unit
+) {
+    LibraryTheme(
+        currentTheme = if (darkTheme) Theme.DARK else Theme.LIGHT,
+//        onThemeChange = onThemeChange,
+        content = content
+    )
 }
 
 enum class Theme(

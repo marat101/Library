@@ -1,6 +1,7 @@
 [versions]
 coilCompose = "3.1.0"
 compileSdk = "35"
+datastorePreferences = "1.1.4"
 ktorClientCore = "3.1.2"
 pagingCompose = "3.3.6"
 targetSdk = "35"
@@ -19,11 +20,12 @@ composeBom = "2025.03.01"
 navigation = "2.8.9"
 serializationJson = "1.8.0"
 pdfViewer = "1.0.0-alpha"
-
+coroutines = "1.10.1"
 
 [libraries]
 
 # Tests
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -50,6 +52,7 @@ androidx-navigation = { group = "androidx.navigation", name = "navigation-compos
 io-marat-pdfviewer = { group = "io.github.marat101", name = "pdf-viewer", version.ref = "pdfViewer" }
 
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializationJson" }
+kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
 
 # Dagger
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }

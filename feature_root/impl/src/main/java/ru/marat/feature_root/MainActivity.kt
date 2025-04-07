@@ -6,37 +6,26 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.background
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.input.pointer.PointerEventPass
-import androidx.compose.ui.input.pointer.PointerInputChange
-import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.platform.LocalDensity
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import androidx.navigation.toRoute
-import kotlinx.serialization.json.Json
-import kotlinx.serialization.modules.SerializersModule
-import kotlinx.serialization.modules.polymorphic
 import ru.marat.core_di.InjectUtils
 import ru.marat.feature_home.HomeScreen
-import ru.marat.feature_profile.ProfileScreen
+import ru.marat.feature_profile.SearchScreen
 import ru.marat.feature_root.di.RootDependencies
+import ru.marat.feature_root.ui.RootViewModel
 import ru.marat.feature_root.ui.bottom_navigation.BottomNavigationBar
 import ru.marat.feature_root.ui.bottom_navigation.NavigationButton
 import ru.marat.feature_root.ui.layout.RootLayout
+import ru.marat.feature_settings.SettingsScreens
 import ru.marat.library.ui.theme.LibraryTheme
-import ru.marat.navigation_api.AppNavController
-import ru.marat.navigation_api.Screen
 import ru.marat.navigation_api.register
 import javax.inject.Inject
 
@@ -45,31 +34,27 @@ class MainActivity : ComponentActivity() {
     @Inject
     lateinit var navigationApiProvider: NavigationApiProvider
 
-    @Inject
-    lateinit var appNavigation: AppNavController
+    lateinit var viewModel: RootViewModel
 
     @SuppressLint("RestrictedApi")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()
         val apis = navigationApiProvider.getAll()
-        val appNavigation = appNavigation as AppNavigationController
         enableEdgeToEdge()
         setContent {
+            val state = viewModel.state.collectAsState()
             val navController = rememberNavController()
-            val systemIsDark = isSystemInDarkTheme()
-            val isDark = remember { mutableStateOf(systemIsDark) }
-            appNavigation.init(navController)
+            viewModel.initNavController(navController)
+            if (state.value.theme == null) return@setContent
             LibraryTheme(
-                darkTheme = isDark.value,
-                onThemeChange = { isDark.value = !isDark.value }
+                currentTheme = state.value.theme!!,
             ) {
                 Column(
                     modifier = Modifier
                         .fillMaxSize()
                         .background(MaterialTheme.colorScheme.background),
                 ) {
-                    val bottomBarState = remember { mutableStateOf(NavigationButton.MAIN) }
                     RootLayout(
                         root = {
                             val density = LocalDensity.current
@@ -90,22 +75,15 @@ class MainActivity : ComponentActivity() {
                     ) {
                         BottomNavigationBar(
                             modifier = Modifier,
-                            selectedButton = bottomBarState.value,
+                            selectedButton = state.value.activeButton,
                             buttons = NavigationButton.entries,
-                            onClick = {
-                                if (!listOf( //todo
-                                        HomeScreen::class.qualifiedName,
-                                        ProfileScreen::class.qualifiedName,
+                            onClick = { //todo придумать что то получше
+                                if (listOf(
+                                        SettingsScreens.Feedback::class.qualifiedName,
+                                        SearchScreen::class.qualifiedName,
                                     ).contains(navController.currentBackStackEntry?.destination?.route)
                                 ) return@BottomNavigationBar
-                                bottomBarState.value = it
-                                navController.navigate(it.route) {
-                                    launchSingleTop = true
-                                    popUpTo(navController.graph.id) {
-                                        saveState = true
-                                    }
-                                    restoreState = true
-                                }
+                                viewModel.bottomNavigation(navController.graph.id, it)
                             }
                         )
                     }
@@ -114,6 +92,10 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun inject() =
-        InjectUtils.appDependencies<RootDependencies>().component.create().inject(this)
+    private fun inject() {
+        val component = InjectUtils.appDependencies<RootDependencies>().rootComponent.create()
+        component.inject(this)
+        viewModel =
+            ViewModelProvider(this, component.rootViewModelFactory)[RootViewModel::class.java]
+    }
 }

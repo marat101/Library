@@ -28,6 +28,7 @@
             <option value="$PROJECT_DIR$/feature_search/impl" />
             <option value="$PROJECT_DIR$/feature_settings" />
             <option value="$PROJECT_DIR$/feature_settings/api" />
+            <option value="$PROJECT_DIR$/feature_settings/data" />
             <option value="$PROJECT_DIR$/feature_settings/impl" />
           </set>
         </option>

@@ -7,12 +7,15 @@ import ru.marat.feature_home.presentation.HomeViewModel
 import ru.marat.feature_root.NavigationApiProvider
 import ru.marat.feature_root.di.RootComponent
 import ru.marat.feature_root.di.RootModule
+import ru.marat.feature_settings.di.SettingsModule
 import ru.marat.library.NavigationApiProviderImpl
 import javax.inject.Singleton
 
 @Module(
-    subcomponents = [RootComponent::class],
-    includes = [RootModule::class]
+    includes = [
+        RootModule::class,
+        SettingsModule::class
+    ]
 )
 class AppModule {
 

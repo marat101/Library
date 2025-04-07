@@ -77,7 +77,7 @@ fun GridBookItem(
                 isFavorite = isFavorite,
                 onFavoriteClick = onFavClick
             )
-            // todo image and fav button
+            // todo image
         }
 
         Column(

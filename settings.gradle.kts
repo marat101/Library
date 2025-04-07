@@ -42,3 +42,4 @@ include(":feature_search:impl")
 
 include(":feature_settings:api")
 include(":feature_settings:impl")
+include(":feature_settings:data")

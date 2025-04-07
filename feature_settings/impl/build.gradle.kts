@@ -38,6 +38,7 @@ android {
 dependencies {
 
     implementation(projects.coreUi)
+    implementation(projects.coreDi)
     implementation(projects.featureSettings.api)
 
     implementation(libs.dagger)
@@ -47,6 +48,7 @@ dependencies {
 
     implementation(libs.coil.compose)
 
+    implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

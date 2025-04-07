@@ -28,7 +28,7 @@ data class AppColorScheme(
 )
 
 val appLightColorScheme = AppColorScheme(
-    bookItemBackground = Color(0xFFefefef),
+    bookItemBackground = Color(0xFFFFFFFF),
     bookItemTitle = Color(0xFF000000),
     bookItemDescription = Color(0xFF343434),
     topAppBarActions = Color(0xFF000000),
