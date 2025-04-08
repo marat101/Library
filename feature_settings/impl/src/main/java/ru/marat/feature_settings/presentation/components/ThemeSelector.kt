@@ -36,17 +36,17 @@ import androidx.compose.ui.layout.boundsInWindow
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.W400
 import androidx.compose.ui.text.style.TextOverflow
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEach
 import com.turtleteam.ui.theme_animator.LocalThemeAnimator
 import ru.marat.core_ui.components.common.clickWithoutIndication
 import ru.marat.core_ui.theme.AppTheme
+import ru.marat.feature_settings.api.R
 import ru.marat.feature_settings.presentation.settings.SettingsViewModel
-import ru.marat.library.ui.theme.LibraryTheme
 import ru.marat.library.ui.theme.LocalTheme
 import ru.marat.library.ui.theme.Theme
 import ru.marat.library.ui.theme.isDark
@@ -96,7 +96,10 @@ fun ThemeSelector( //todo надо бы по-нормальному сделат
                         it,
                         RoundRect(buttonBounds, CornerRadius(cornerRadiusPx)),
                     )
-                } else themeAnimator.fastChangeTheme(it)
+                } else {
+                    viewModel.onThemeChanged(it)
+                    themeAnimator.fastChangeTheme(it)
+                }
             },
         )
         SelectedTheme(
@@ -190,10 +193,10 @@ private fun SelectedTheme(
                     contentDescription = null
                 )
                 Text(
-                    text = when (it) { //todo res
-                        Theme.SYSTEM -> "Системная"
-                        Theme.DARK -> "Тёмная"
-                        Theme.LIGHT -> "Светлая"
+                    text = when (it) {
+                        Theme.SYSTEM -> stringResource(R.string.theme_button_system)
+                        Theme.DARK -> stringResource(R.string.theme_button_dark)
+                        Theme.LIGHT -> stringResource(R.string.theme_button_light)
                     },
                     color = MaterialTheme.colorScheme.primary,
                     fontSize = 13.sp,
@@ -238,10 +241,10 @@ private fun Themes(
                     contentDescription = null
                 )
                 Text(
-                    text = when (it) { //todo res
-                        Theme.SYSTEM -> "Системная"
-                        Theme.DARK -> "Тёмная"
-                        Theme.LIGHT -> "Светлая"
+                    text = when (it) {
+                        Theme.SYSTEM -> stringResource(R.string.theme_button_system)
+                        Theme.DARK -> stringResource(R.string.theme_button_dark)
+                        Theme.LIGHT -> stringResource(R.string.theme_button_light)
                     },
                     color = AppTheme.colorScheme.themeDisabled,
                     fontSize = 13.sp,

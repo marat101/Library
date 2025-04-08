@@ -15,8 +15,7 @@ class ProfileNavigationApiImpl : ProfileNavigationApi {
     ) {
         navGraphBuilder.composable<ProfileScreen> {
             ProfileScreen(
-                modifier = modifier,
-                navController = navController
+                modifier = modifier
             )
         }
     }

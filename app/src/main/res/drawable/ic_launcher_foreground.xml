@@ -1,30 +1,19 @@
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:aapt="http://schemas.android.com/aapt"
     android:width="108dp"
     android:height="108dp"
-    android:viewportWidth="108"
-    android:viewportHeight="108">
-    <path android:pathData="M31,63.928c0,0 6.4,-11 12.1,-13.1c7.2,-2.6 26,-1.4 26,-1.4l38.1,38.1L107,108.928l-32,-1L31,63.928z">
-        <aapt:attr name="android:fillColor">
-            <gradient
-                android:endX="85.84757"
-                android:endY="92.4963"
-                android:startX="42.9492"
-                android:startY="49.59793"
-                android:type="linear">
-                <item
-                    android:color="#44000000"
-                    android:offset="0.0" />
-                <item
-                    android:color="#00000000"
-                    android:offset="1.0" />
-            </gradient>
-        </aapt:attr>
-    </path>
-    <path
-        android:fillColor="#FFFFFF"
-        android:fillType="nonZero"
-        android:pathData="M65.3,45.828l3.8,-6.6c0.2,-0.4 0.1,-0.9 -0.3,-1.1c-0.4,-0.2 -0.9,-0.1 -1.1,0.3l-3.9,6.7c-6.3,-2.8 -13.4,-2.8 -19.7,0l-3.9,-6.7c-0.2,-0.4 -0.7,-0.5 -1.1,-0.3C38.8,38.328 38.7,38.828 38.9,39.228l3.8,6.6C36.2,49.428 31.7,56.028 31,63.928h46C76.3,56.028 71.8,49.428 65.3,45.828zM43.4,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2c-0.3,-0.7 -0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C45.3,56.528 44.5,57.328 43.4,57.328L43.4,57.328zM64.6,57.328c-0.8,0 -1.5,-0.5 -1.8,-1.2s-0.1,-1.5 0.4,-2.1c0.5,-0.5 1.4,-0.7 2.1,-0.4c0.7,0.3 1.2,1 1.2,1.8C66.5,56.528 65.6,57.328 64.6,57.328L64.6,57.328z"
-        android:strokeWidth="1"
-        android:strokeColor="#00000000" />
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+  <group android:scaleX="0.5295349"
+      android:scaleY="0.5295349"
+      android:translateX="5.6455812"
+      android:translateY="5.8809304">
+
+      <path
+          android:fillColor="@color/foreground"
+          android:fillType="evenOdd"
+          android:pathData="M3.255,3.667C2.693,3.012 3.159,2 4.022,2L16.5,2C18.985,2 21,4.015 21,6.5C21,8.985 18.985,11 16.5,11L4.022,11C3.159,11 2.693,9.988 3.255,9.333L4.009,8.452C4.972,7.329 4.972,5.671 4.009,4.548L3.255,3.667ZM6.062,4C6.955,5.544 6.955,7.456 6.062,9L16.5,9C17.881,9 19,7.881 19,6.5C19,5.119 17.881,4 16.5,4L6.062,4ZM3,16.5C3,14.015 5.015,12 7.5,12L19.978,12C20.841,12 21.307,13.012 20.745,13.667L19.99,14.548C19.028,15.671 19.028,17.329 19.99,18.452L20.745,19.333C21.307,19.988 20.841,21 19.978,21L7.5,21C5.015,21 3,18.985 3,16.5ZM7.5,14C6.119,14 5,15.119 5,16.5C5,17.881 6.119,19 7.5,19L17.938,19C17.045,17.456 17.045,15.544 17.938,14L7.5,14Z"
+          android:strokeWidth="1"
+          android:strokeColor="#00000000" />
+
+  </group>
 </vector>

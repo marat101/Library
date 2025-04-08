@@ -2,4 +2,7 @@
 <resources>
     <string name="top_app_bar_title">Настройки</string>
     <string name="settings_theme">Тема оформления</string>
+    <string name="theme_button_light">Светлая</string>
+    <string name="theme_button_dark">Тёмная</string>
+    <string name="theme_button_system">Системная</string>
 </resources>

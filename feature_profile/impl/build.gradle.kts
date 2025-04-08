@@ -38,6 +38,7 @@ android {
 dependencies {
 
     implementation(projects.coreUi)
+    implementation(projects.coreDi)
     implementation(projects.featureProfile.api)
     implementation(projects.featureSettings.api)
 

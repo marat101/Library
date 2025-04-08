@@ -2,6 +2,8 @@ package ru.marat.feature_root
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.view.View
+import android.view.ViewTreeObserver
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -26,6 +28,7 @@ import ru.marat.feature_root.ui.bottom_navigation.NavigationButton
 import ru.marat.feature_root.ui.layout.RootLayout
 import ru.marat.feature_settings.SettingsScreens
 import ru.marat.library.ui.theme.LibraryTheme
+import ru.marat.library.ui.theme.Theme
 import ru.marat.navigation_api.register
 import javax.inject.Inject
 
@@ -42,13 +45,13 @@ class MainActivity : ComponentActivity() {
         inject()
         val apis = navigationApiProvider.getAll()
         enableEdgeToEdge()
+        preDraw()
         setContent {
             val state = viewModel.state.collectAsState()
             val navController = rememberNavController()
             viewModel.initNavController(navController)
-            if (state.value.theme == null) return@setContent
             LibraryTheme(
-                currentTheme = state.value.theme!!,
+                currentTheme = state.value.theme?: Theme.LIGHT,
             ) {
                 Column(
                     modifier = Modifier
@@ -90,6 +93,25 @@ class MainActivity : ComponentActivity() {
                 }
             }
         }
+    }
+
+    fun preDraw() {
+        val content: View = findViewById(android.R.id.content)
+        content.viewTreeObserver.addOnPreDrawListener(
+            object : ViewTreeObserver.OnPreDrawListener {
+                override fun onPreDraw(): Boolean {
+                    // Check whether the initial data is ready.
+                    return if (viewModel.state.value.theme != null) {
+                        // The content is ready. Start drawing.
+                        content.viewTreeObserver.removeOnPreDrawListener(this)
+                        true
+                    } else {
+                        // The content isn't ready. Suspend.
+                        false
+                    }
+                }
+            }
+        )
     }
 
     private fun inject() {

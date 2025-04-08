@@ -40,8 +40,10 @@ import coil3.request.ImageRequest
 import ru.marat.core_ui.theme.AppTheme
 import ru.marat.feature_profile.api.R
 import ru.marat.feature_profile.presentation.components.DefaultAvatar
-import ru.marat.feature_profile.presentation.components.profile_buttons.ProfileButton
-import ru.marat.feature_profile.presentation.components.profile_buttons.ProfileButtonData
+import ru.marat.core_ui.components.app.profile_buttons.ProfileButton
+import ru.marat.core_ui.components.app.profile_buttons.ProfileButtonData
+import ru.marat.core_ui.components.common.calculateHorizontalPadding
+import ru.marat.feature_profile.di.profileViewModel
 import ru.marat.feature_settings.SettingsScreens
 import ru.marat.library.ui.theme.LibraryTheme
 import ru.marat.core_ui.R as CoreRes
@@ -50,8 +52,7 @@ import ru.marat.core_ui.R as CoreRes
 @Composable
 fun ProfileScreen(
     modifier: Modifier = Modifier,
-    navController: NavController, //todo delete
-    viewModel: ProfileViewModel = remember { ProfileViewModel() } //todo
+    viewModel: ProfileViewModel = profileViewModel()
 ) {
     val profileButtons = listOf(
         ProfileButtonData(
@@ -65,7 +66,6 @@ fun ProfileScreen(
             action = { /*TODO navigation to my library*/ }
         )
     )
-
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -86,7 +86,7 @@ fun ProfileScreen(
                         .clickable(
                             indication = ripple(bounded = false, radius = 32.dp),
                             interactionSource = remember { MutableInteractionSource() },
-                            onClick = { navController.navigate(SettingsScreens.Settings) }
+                            onClick = { viewModel.onSettingsClick() }
                         ),
                     painter = painterResource(CoreRes.drawable.ic_settings_outlined),
                     contentDescription = null,
@@ -120,6 +120,7 @@ fun ProfileLayout(
         )
     }
     val scrollState = rememberScrollState()
+    val horizontalPadding = calculateHorizontalPadding()
     Column(
         modifier = modifier
             .verticalScroll(scrollState)
@@ -151,10 +152,8 @@ fun ProfileLayout(
         Spacer(Modifier.height(60.dp))
         val buttonsModifier = Modifier
             .fillMaxWidth()
-            .padding(
-                vertical = 14.dp,
-                horizontal = 16.dp
-            )
+            .padding(vertical = 14.dp,)
+            .padding(horizontalPadding)
         actions.fastForEach {
             ProfileButton(
                 modifier = buttonsModifier,
