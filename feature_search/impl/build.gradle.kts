@@ -10,10 +10,6 @@ android {
     namespace = "ru.marat.feature_search"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
-    kapt {
-        generateStubs = true
-    }
-
     lint {
         targetSdk = libs.versions.targetSdk.get().toInt()
     }
@@ -37,7 +33,7 @@ android {
 
 dependencies {
 
-    implementation(projects.featureSearch.api)
+    implementation(projects.coreUi)
     implementation(projects.featureSearch.api)
 
     implementation(libs.dagger)

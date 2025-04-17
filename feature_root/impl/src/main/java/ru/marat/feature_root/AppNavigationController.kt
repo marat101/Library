@@ -7,6 +7,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavOptionsBuilder
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlinx.serialization.modules.SerializersModule
 import ru.marat.navigation_api.AppNavController
 import ru.marat.navigation_api.Screen
@@ -21,6 +22,11 @@ class AppNavigationController : AppNavController {
     fun init(navController: NavController) {
 
         this.navController = navController
+        CoroutineScope(Dispatchers.IO).launch {
+            navController?.currentBackStack?.collect {
+                println("alskdmaslkdmsad ${it.map { it.destination.route }}")
+            }
+        }
     }
 
     override fun navigate(route: Screen, options: (NavOptionsBuilder.() -> Unit)?) {

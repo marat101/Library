@@ -1,33 +1,36 @@
 [versions]
-coilCompose = "3.1.0"
+coilNetworkOkhttp = "3.0.4"
 compileSdk = "35"
-datastorePreferences = "1.1.4"
-ktorClientCore = "3.1.2"
-pagingCompose = "3.3.6"
 targetSdk = "35"
 minSdk = "26"
 
+pagingCompose = "3.3.6"
+datastorePreferences = "1.1.4"
+coilCompose = "3.1.0"
 agp = "8.9.1"
 kotlin = "2.1.10"
-coreKtx = "1.15.0"
+coreKtx = "1.16.0"
 junit = "4.13.2"
 junitVersion = "1.2.1"
 espressoCore = "3.6.1"
 lifecycleRuntimeKtx = "2.8.7"
 activityCompose = "1.10.1"
 dagger = "2.55"
-composeBom = "2025.03.01"
+composeBom = "2025.04.00"
 navigation = "2.8.9"
 serializationJson = "1.8.0"
 pdfViewer = "1.0.0-alpha"
 coroutines = "1.10.1"
+ktor = "2.3.12"
+kotlinxDatetime = "0.5.0"
+encryptedSharedPreferences = "1.1.0-alpha07"
+
 
 [libraries]
 
 # Tests
-androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
-androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
 coil-compose = { module = "io.coil-kt.coil3:coil-compose", version.ref = "coilCompose" }
+coil-network-okhttp = { module = "io.coil-kt.coil3:coil-network-okhttp", version.ref = "coilNetworkOkhttp" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
@@ -48,16 +51,29 @@ androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-navigation = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigation" }
 
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "pagingCompose" }
+
+# Local storage
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
+androidx-security-crypto = { group = "androidx.security", name = "security-crypto", version.ref = "encryptedSharedPreferences" }
+
 # PDF
 io-marat-pdfviewer = { group = "io.github.marat101", name = "pdf-viewer", version.ref = "pdfViewer" }
 
+# Ktor
+ktor-client-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
+ktor-client-android = { group = "io.ktor", name = "ktor-client-okhttp", version.ref = "ktor" }
+ktor-client-logging = { group = "io.ktor", name = "ktor-client-logging", version.ref = "ktor" }
+ktor-serialization-json = { group = "io.ktor", name = "ktor-serialization-kotlinx-json", version.ref = "ktor" }
+ktor-client-content-negotiation = { group = "io.ktor", name = "ktor-client-content-negotiation", version.ref = "ktor" }
+
 kotlinx-serialization-json = { group = "org.jetbrains.kotlinx", name = "kotlinx-serialization-json", version.ref = "serializationJson" }
 kotlinx-coroutines-android = { group = "org.jetbrains.kotlinx", name = "kotlinx-coroutines-android", version.ref = "coroutines" }
+kotlinx-datetime = { group = "org.jetbrains.kotlinx", name = "kotlinx-datetime", version.ref = "kotlinxDatetime" }
 
 # Dagger
 dagger = { group = "com.google.dagger", name = "dagger", version.ref = "dagger" }
 dagger-compiler = { group = "com.google.dagger", name = "dagger-compiler", version.ref = "dagger" }
-ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktorClientCore" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

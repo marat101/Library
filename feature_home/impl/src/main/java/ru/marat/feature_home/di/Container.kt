@@ -18,7 +18,7 @@ class HomeContainer {
 
 @SuppressLint("ComposableNaming")
 @Composable
-fun daggerViewModel(): HomeViewModel {
+fun homeViewModel(): HomeViewModel {
     val container = remember {
         HomeContainer().also {
             DaggerHomeComponent

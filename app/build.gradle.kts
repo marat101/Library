@@ -60,6 +60,14 @@ dependencies {
     implementation(projects.featureSettings.api)
     implementation(projects.featureSettings.data)
     implementation(projects.featureSettings.impl)
+    implementation(projects.featureAuth.api)
+    implementation(projects.featureAuth.impl)
+    implementation(projects.coreNetwork.api)
+    implementation(projects.coreNetwork.impl)
+    implementation(projects.coreAuth.api)
+    implementation(projects.coreAuth.impl)
+    implementation(projects.featureReader.api)
+    implementation(projects.featureReader.impl)
 
     implementation(libs.kotlinx.serialization.json)
 

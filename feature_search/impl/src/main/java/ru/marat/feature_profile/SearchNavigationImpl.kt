@@ -7,6 +7,7 @@ import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.composable
 import androidx.navigation.toRoute
+import ru.marat.feature_profile.presentation.SearchScreen
 
 class SearchNavigationImpl : SearchNavigationApi {
     override fun registerGraph(

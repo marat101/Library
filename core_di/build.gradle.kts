@@ -8,10 +8,6 @@ android {
     namespace = "ru.marat.core_di"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
-    kapt {
-        generateStubs = true
-    }
-
     lint {
         targetSdk = libs.versions.targetSdk.get().toInt()
     }

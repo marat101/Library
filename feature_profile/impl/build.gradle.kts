@@ -10,10 +10,6 @@ android {
     namespace = "ru.marat.feature_profile.impl"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
-    kapt {
-        generateStubs = true
-    }
-
     lint {
         targetSdk = libs.versions.targetSdk.get().toInt()
     }

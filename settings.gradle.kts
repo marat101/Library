@@ -28,6 +28,12 @@ include(":core_navigation")
 include(":core_di")
 include(":core_ui")
 
+include(":core_auth:api")
+include(":core_auth:impl")
+
+include(":core_network:api")
+include(":core_network:impl")
+
 include(":feature_root:api")
 include(":feature_root:impl")
 
@@ -43,3 +49,10 @@ include(":feature_search:impl")
 include(":feature_settings:api")
 include(":feature_settings:impl")
 include(":feature_settings:data")
+
+include(":feature_auth:api")
+include(":feature_auth:impl")
+include(":feature_auth:presentation")
+
+include(":feature_reader:api")
+include(":feature_reader:impl")

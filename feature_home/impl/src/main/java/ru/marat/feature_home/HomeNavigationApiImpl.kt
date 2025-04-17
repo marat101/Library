@@ -15,7 +15,7 @@ class HomeNavigationApiImpl : HomeNavigationApi {
     ) {
         navGraphBuilder.composable<HomeScreen> {
             HomeScreen(
-                modifier = modifier,
+                modifier = modifier
             )
         }
     }

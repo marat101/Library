@@ -10,10 +10,6 @@ android {
     namespace = "ru.marat.feature_root"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
-    kapt {
-        generateStubs = true
-    }
-
     lint {
         targetSdk = libs.versions.targetSdk.get().toInt()
     }
@@ -38,11 +34,14 @@ android {
 dependencies {
 
     implementation(projects.coreDi)
+    implementation(projects.coreAuth.api)
     implementation(projects.featureHome.api)
     implementation(projects.featureRoot.api)
+    implementation(projects.featureAuth.api)
     implementation(projects.featureProfile.api)
     implementation(projects.featureSettings.api)
     implementation(projects.featureSearch.api)
+    implementation(projects.featureReader.api)
     implementation(projects.coreUi)
 
     implementation(libs.kotlinx.serialization.json)

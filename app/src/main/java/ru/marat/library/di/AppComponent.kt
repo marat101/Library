@@ -4,6 +4,7 @@ import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
 import ru.marat.core_di.BaseComponent
+import ru.marat.library.di.app_modules.AppModule
 import javax.inject.Singleton
 
 @Singleton

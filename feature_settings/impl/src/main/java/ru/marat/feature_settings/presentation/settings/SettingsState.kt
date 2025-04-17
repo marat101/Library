@@ -5,5 +5,6 @@ import ru.marat.library.ui.theme.Theme
 
 @Immutable
 data class SettingsState(
-    val theme: Theme = Theme.LIGHT
+    val theme: Theme = Theme.LIGHT,
+    val confirmExitDialog: Boolean = false
 )

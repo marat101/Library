@@ -2,14 +2,10 @@ package ru.marat.feature_settings.presentation.settings
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -22,12 +18,11 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight.Companion.W500
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.util.fastForEachIndexed
 import ru.marat.core_ui.components.app.profile_buttons.ProfileButton
@@ -36,6 +31,7 @@ import ru.marat.core_ui.components.common.calculateHorizontalPadding
 import ru.marat.core_ui.theme.AppTheme
 import ru.marat.feature_settings.api.R
 import ru.marat.feature_settings.di.contatiners.settingsViewModel
+import ru.marat.feature_settings.presentation.common.ConfirmDialog
 import ru.marat.feature_settings.presentation.components.ThemeSelector
 import ru.marat.core_ui.R as CoreRes
 
@@ -45,6 +41,8 @@ fun SettingsScreen(
     modifier: Modifier = Modifier,
     viewModel: SettingsViewModel = settingsViewModel(),
 ) {
+    val state = viewModel.state.collectAsState()
+
     val buttons = listOf<ProfileButtonData>( //todo res
         ProfileButtonData(
             text = "Обратная связь",
@@ -68,7 +66,7 @@ fun SettingsScreen(
             icon = CoreRes.drawable.ic_exit,
             textColor = MaterialTheme.colorScheme.error,
             action = {
-                // todo logout
+                viewModel.onLogoutClick()
             }
         )
     )
@@ -148,5 +146,11 @@ fun SettingsScreen(
                 )
             }
         }
+    }
+    ConfirmDialog(
+        visible = state.value.confirmExitDialog,
+        onConfirm = { viewModel.onLogoutConfirmClick() }
+    ) {
+        viewModel.onCloseConfirmDialog()
     }
 }

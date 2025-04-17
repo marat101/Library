@@ -10,10 +10,6 @@ android {
     namespace = "ru.marat.feature_settings.impl"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
-    kapt {
-        generateStubs = true
-    }
-
     lint {
         targetSdk = libs.versions.targetSdk.get().toInt()
     }
@@ -39,7 +35,9 @@ dependencies {
 
     implementation(projects.coreUi)
     implementation(projects.coreDi)
+    implementation(projects.coreAuth.api)
     implementation(projects.featureSettings.api)
+    implementation(projects.featureAuth.api)
 
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)

@@ -45,7 +45,7 @@ fun FavoriteButton(
     Box(
         modifier =
             modifier
-                .shadow(1.dp, shape)
+                .shadow(4.dp, shape)
                 .background(AppTheme.colorScheme.bookItemBackground, shape)
                 .clickable(
                     indication = ripple(),

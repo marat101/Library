@@ -5,6 +5,7 @@ import ru.marat.feature_settings.di.contatiners.SettingsContainer
 
 @Subcomponent(
     modules = [
+        SettingsUseCasesModule::class,
         SettingsViewModelModule::class
     ]
 )
