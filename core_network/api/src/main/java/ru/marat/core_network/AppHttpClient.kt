@@ -3,6 +3,7 @@ package ru.marat.core_network
 import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.statement.HttpResponse
 import io.ktor.http.ContentType
+import java.io.File
 
 interface AppHttpClient {
     suspend fun request(
@@ -18,4 +19,12 @@ interface AppAuthHttpClient {
         contentType: ContentType = ContentType.Application.Json,
         builder: HttpRequestBuilder.() -> Unit
     ): HttpResponse
+
+    /** @param progress from 0.0(0%) to 1.0(100%) */
+    suspend fun downloadFile(
+        url: String,
+        to: File,
+        onStart: (totalFileSize: Long) -> Unit,
+        progress: (progress: Float) -> Unit
+    )
 }

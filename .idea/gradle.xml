@@ -24,6 +24,9 @@
             <option value="$PROJECT_DIR$/feature_auth/api" />
             <option value="$PROJECT_DIR$/feature_auth/impl" />
             <option value="$PROJECT_DIR$/feature_auth/presentation" />
+            <option value="$PROJECT_DIR$/feature_book" />
+            <option value="$PROJECT_DIR$/feature_book/api" />
+            <option value="$PROJECT_DIR$/feature_book/impl" />
             <option value="$PROJECT_DIR$/feature_home" />
             <option value="$PROJECT_DIR$/feature_home/api" />
             <option value="$PROJECT_DIR$/feature_home/impl" />

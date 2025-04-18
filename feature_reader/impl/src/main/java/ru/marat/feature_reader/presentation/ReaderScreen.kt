@@ -60,9 +60,7 @@ fun ReaderScreenUi(
                     .fillMaxSize()
                     .clipToBounds(),
                 layoutState = readerState
-            ) {
-
-            }
+            ) {}
         }
     }
 }
