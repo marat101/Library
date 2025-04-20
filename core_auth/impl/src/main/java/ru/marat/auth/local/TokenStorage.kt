@@ -1,13 +1,11 @@
 package ru.marat.auth.local
 
-import android.annotation.SuppressLint
-import android.content.Context
 import kotlinx.serialization.json.Json
 import ru.marat.auth.dto.TokensDto
+import ru.marat.core_data.AppPreferences
 
-@SuppressLint("ApplySharedPref", "UseKtx")
 class TokenStorage(
-    context: Context
+    private val appPreferences: AppPreferences
 ) {
 
     companion object {
@@ -15,22 +13,20 @@ class TokenStorage(
     }
     private var inMemoryCache: TokensDto? = null
 
-    private val sharedPrefs = context.getSharedPreferences("tokens", Context.MODE_PRIVATE)
-
     fun getTokens(): TokensDto? {
         if (inMemoryCache != null) return inMemoryCache
-        val str = sharedPrefs.getString(TOKEN_KEY, null) ?: return null
+        val str = appPreferences[TOKEN_KEY] ?: return null
         return Json.decodeFromString<TokensDto>(str)
     }
 
     fun saveTokens(tokens: TokensDto) {
         val str = Json.encodeToString(TokensDto.serializer(), tokens)
-        sharedPrefs.edit().putString(TOKEN_KEY, str).commit()
+        appPreferences[TOKEN_KEY] = str
         inMemoryCache = tokens
     }
 
     fun clearData() {
         inMemoryCache = null
-        sharedPrefs.edit().clear().commit()
+        appPreferences[TOKEN_KEY] = null
     }
 }

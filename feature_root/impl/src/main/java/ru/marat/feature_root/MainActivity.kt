@@ -20,6 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.rememberNavController
 import ru.marat.auth.AuthScreen
 import ru.marat.core_di.InjectUtils
+import ru.marat.feature_book.BookScreen
 import ru.marat.feature_profile.SearchScreen
 import ru.marat.feature_reader.ReaderScreen
 import ru.marat.feature_root.di.RootDependencies

@@ -12,6 +12,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.marat.core_ui.view_model.BaseViewModel
 import ru.marat.core_ui.view_model.LoadingState
+import ru.marat.feature_book.BookScreen
 import ru.marat.feature_home.network.MainRepository
 import ru.marat.feature_profile.SearchScreen
 import ru.marat.feature_reader.ReaderScreen
@@ -25,11 +26,7 @@ class HomeViewModel(
     private val mainRepository: MainRepository
 ) : BaseViewModel() {
 
-    private val _state = MutableStateFlow(
-        HomeState(
-            loadingState = LoadingState.Loading
-        )
-    )
+    private val _state = MutableStateFlow(HomeState())
     val state: StateFlow<HomeState>
         get() = _state.asStateFlow()
 
@@ -46,17 +43,19 @@ class HomeViewModel(
             }
             _state.update {
                 it.copy(
-                    books = it.books.map { book ->
-                        if (book.id == id) book.copy(isFavorite = added)
-                        else book
-                    }
+                    books = LoadingState.Success(
+                        it.books.dataOrNull()?.map { book ->
+                            if (book.id == id) book.copy(isFavorite = added)
+                            else book
+                        } ?: listOf()
+                    )
                 )
             }
         }
     }
 
     fun onFavoriteClick(id: Long) {
-        if (_state.value.books.find { it.id == id }!!.isFavorite)
+        if (_state.value.books.dataOrNull()?.find { it.id == id }!!.isFavorite)
             removeFromFavorite(id)
         else addToFavorite(id)
     }
@@ -68,19 +67,21 @@ class HomeViewModel(
             }
             _state.update {
                 it.copy(
-                    books = it.books.map { book ->
-                        if (book.id == id) book.copy(isFavorite = removed)
-                        else book
-                    }
+                    books = LoadingState.Success(
+                        it.books.dataOrNull()?.map { book ->
+                            if (book.id == id) book.copy(isFavorite = removed)
+                            else book
+                        } ?: listOf()
+                    )
                 )
             }
         }
     }
 
     fun loadMainScreen() {
-        if (_state.value.books.isEmpty()) {
+        if (!_state.value.books.isSuccess) {
             _state.update {
-                it.copy(loadingState = LoadingState.Loading)
+                it.copy(books = LoadingState.Loading)
             }
             viewModelScope.launch {
                 appSuspendRunCatching {
@@ -89,14 +90,13 @@ class HomeViewModel(
                     }
                     _state.update {
                         it.copy(
-                            loadingState = LoadingState.Success(books),
-                            books = books
+                            books = LoadingState.Success(books)
                         )
                     }
                 }.onFailure { e ->
                     _state.update {
                         it.copy(
-                            loadingState = LoadingState.Error(e)
+                            books = LoadingState.Error(e)
                         )
                     }
                 }
@@ -104,14 +104,8 @@ class HomeViewModel(
         }
     }
 
-    fun select(id: Long?){
-        _state.update { it.copy(selectedBook = id) }
-    }
-    fun openBook(uri: String) {
-        navigation.navigate(ReaderScreen(uri)){
-            launchSingleTop = true
-        }
-        _state.update { it.copy(selectedBook = null) }
+    fun onBookClick(id: Long) {
+        navigation.navigate(BookScreen(id))
     }
 
     @Suppress("UNCHECKED_CAST")

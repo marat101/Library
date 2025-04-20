@@ -81,27 +81,28 @@ fun HomeScreen(
                 horizontalArrangement = Arrangement.spacedBy(16.dp),
                 contentPadding = PaddingValues(16.dp)
             ) {
-                items(
-                    state.value.books,
-                    key = { it.id }
-                ) { book ->
-                    GridBookItem(
-                        modifier = Modifier,
-                        title = book.name,
-                        imageUrl = book.imageUrl,
-                        rating = 0f,
-                        ratingState = ratingState,
-                        price = "Бесплатно",
-                        isFavorite = book.isFavorite,
-                        onFavClick = {
-                            viewModel.onFavoriteClick(book.id)
-                            //todo
-                        },
-                        onClick = {
-                            viewModel.select(book.id)
-                        }
-                    )
-                }
+                if (state.value.books.isSuccess)
+                    items(
+                        state.value.books.dataOrNull() ?: listOf(),
+                        key = { it.id }
+                    ) { book ->
+                        GridBookItem(
+                            modifier = Modifier,
+                            title = book.name,
+                            imageUrl = book.imageUrl,
+                            rating = 0f,
+                            ratingState = ratingState,
+                            price = "Бесплатно",
+                            isFavorite = book.isFavorite,
+                            onFavClick = {
+                                viewModel.onFavoriteClick(book.id)
+                                //todo
+                            },
+                            onClick = {
+                                viewModel.onBookClick(book.id)
+                            }
+                        )
+                    }
 //                items(count = 20) {
 //                    val isFavorite = remember { mutableStateOf(false) }
 //                    val rating =
@@ -117,7 +118,7 @@ fun HomeScreen(
 //                    )
 //                }
             }
-            when (state.value.loadingState) {
+            when (state.value.books) {
                 is LoadingState.Error -> {
                     Column(
                         modifier = Modifier.align(Alignment.Center),
@@ -145,7 +146,6 @@ fun HomeScreen(
                         modifier = Modifier.align(Alignment.Center)
                     )
                 }
-
                 is LoadingState.Success<*> -> {}
             }
         }
@@ -155,13 +155,5 @@ fun HomeScreen(
                 ratingState.clear()
             }
         }
-        DownloadingDialog(
-            id = state.value.selectedBook ?: 0,
-            visible = state.value.selectedBook != null,
-            onClose = { viewModel.select(null) },
-            onOpenBook = {
-                viewModel.openBook(it)
-            }
-        )
     }
 }

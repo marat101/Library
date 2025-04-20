@@ -16,6 +16,7 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
+        buildConfigField("String", "API_URL", "\"${getProperty("base_url")}\"")
     }
 
     compileOptions {
@@ -28,6 +29,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
@@ -35,7 +37,10 @@ dependencies {
 
     implementation(projects.coreUi)
     implementation(projects.coreDi)
-    implementation(projects.featureReader.api)
+    implementation(projects.coreNetwork.api)
+    implementation(projects.coreData.api)
+    implementation(projects.featureBook.api)
+    implementation(projects.featureBook.presentation)
 
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)
@@ -44,6 +49,7 @@ dependencies {
 
     implementation(libs.coil.compose)
 
+    implementation(libs.androidx.work.runtime.ktx)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)

@@ -68,6 +68,10 @@ dependencies {
     implementation(projects.coreAuth.impl)
     implementation(projects.featureReader.api)
     implementation(projects.featureReader.impl)
+    implementation(projects.coreData.api)
+    implementation(projects.coreData.impl)
+    implementation(projects.featureBook.api)
+    implementation(projects.featureBook.impl)
 
     implementation(libs.kotlinx.serialization.json)
 
@@ -77,6 +81,7 @@ dependencies {
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.work.runtime.ktx)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)

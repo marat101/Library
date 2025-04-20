@@ -1,6 +1,3 @@
-import java.util.Properties
-import kotlin.apply
-
 plugins {
     alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.compose)
@@ -19,13 +16,7 @@ android {
 
     defaultConfig {
         minSdk = libs.versions.minSdk.get().toInt()
-        val localProperties = Properties().apply {
-            load(rootProject.file("local.properties").inputStream())
-        }
-        val apiHost = (localProperties["backend_host"] ?: project.properties["backend_host"])!!.toString()
-        val apiPort = (localProperties["backend_port"] ?: project.properties["backend_port"])!!.toString()
-
-        buildConfigField("String", "API_URL", "\"$apiHost:$apiPort\"")
+        buildConfigField("String", "API_URL", "\"${getProperty("base_url")}\"")
     }
 
     compileOptions {

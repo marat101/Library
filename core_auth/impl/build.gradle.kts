@@ -28,6 +28,7 @@ android {
 dependencies {
     implementation(projects.coreAuth.api)
     implementation(projects.coreNetwork.api)
+    implementation(projects.coreData.api)
 
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.datetime)

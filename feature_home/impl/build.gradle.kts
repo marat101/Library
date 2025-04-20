@@ -35,6 +35,7 @@ dependencies {
     implementation(projects.featureHome.api)
     implementation(projects.featureSearch.api)
     implementation(projects.featureReader.api)
+    implementation(projects.featureBook.api)
 
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)

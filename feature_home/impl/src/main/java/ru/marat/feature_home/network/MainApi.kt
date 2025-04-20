@@ -18,7 +18,7 @@ class MainApi( //todo потом переделать
             "$BASE_URL/books"
         ) {
             parameter("offset", 0)
-            parameter("limit", 20)
+            parameter("limit", 80)
         }
         return response.body()
     }

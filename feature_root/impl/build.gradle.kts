@@ -33,6 +33,7 @@ android {
 
 dependencies {
 
+    implementation(projects.coreUi)
     implementation(projects.coreDi)
     implementation(projects.coreAuth.api)
     implementation(projects.featureHome.api)
@@ -41,8 +42,8 @@ dependencies {
     implementation(projects.featureProfile.api)
     implementation(projects.featureSettings.api)
     implementation(projects.featureSearch.api)
+    implementation(projects.featureBook.api)
     implementation(projects.featureReader.api)
-    implementation(projects.coreUi)
 
     implementation(libs.kotlinx.serialization.json)
 

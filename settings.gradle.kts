@@ -34,6 +34,9 @@ include(":core_auth:impl")
 include(":core_network:api")
 include(":core_network:impl")
 
+include(":core_data:api")
+include(":core_data:impl")
+
 include(":feature_root:api")
 include(":feature_root:impl")
 
@@ -59,3 +62,4 @@ include(":feature_reader:impl")
 
 include(":feature_book:api")
 include(":feature_book:impl")
+include(":feature_book:presentation")

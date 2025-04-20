@@ -5,6 +5,6 @@ import ru.marat.navigation_api.Screen
 
 @Serializable
 data class ReaderScreen(
-    val uri: String,
+    val id: Long,
     override val root: Boolean = true
 ) : Screen()

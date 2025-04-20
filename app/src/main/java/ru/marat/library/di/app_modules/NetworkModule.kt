@@ -1,6 +1,5 @@
 package ru.marat.library.di.app_modules
 
-import android.content.Context
 import dagger.Module
 import dagger.Provides
 import io.ktor.client.HttpClient
@@ -8,6 +7,7 @@ import ru.marat.auth.TokenRepositoryImpl
 import ru.marat.auth.domain.repository.TokenRepository
 import ru.marat.auth.local.TokenStorage
 import ru.marat.auth.network.TokenApi
+import ru.marat.core_data.AppPreferences
 import ru.marat.core_network.AppAuthHttpClient
 import ru.marat.core_network.AppAuthHttpClientImpl
 import ru.marat.core_network.AppHttpClient
@@ -21,12 +21,12 @@ class NetworkModule {
     @Provides
     @Singleton
     fun provideTokenManager(
-        context: Context,
+        appStorage: AppPreferences,
         client: AppHttpClient
     ): TokenRepository {
         return TokenRepositoryImpl(
             TokenApi(client),
-            TokenStorage(context)
+            TokenStorage(appStorage)
         )
     }
 

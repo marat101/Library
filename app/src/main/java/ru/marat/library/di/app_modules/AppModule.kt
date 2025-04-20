@@ -11,7 +11,8 @@ import ru.marat.library.NavigationApiProviderImpl
     includes = [
         RootModule::class,
         SettingsModule::class,
-        NetworkModule::class
+        NetworkModule::class,
+        DataModule::class
     ]
 )
 class AppModule {

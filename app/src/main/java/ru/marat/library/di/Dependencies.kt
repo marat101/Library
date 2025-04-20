@@ -1,6 +1,7 @@
 package ru.marat.library.di
 
 import ru.marat.auth.di.AuthDependencies
+import ru.marat.feature_book.di.BookDependencies
 import ru.marat.feature_home.di.HomeDependencies
 import ru.marat.feature_profile.di.ProfileDependencies
 import ru.marat.feature_root.di.RootDependencies
@@ -11,4 +12,5 @@ interface Dependencies :
     HomeDependencies,
     SettingsDependencies,
     ProfileDependencies,
-    AuthDependencies
+    AuthDependencies,
+    BookDependencies

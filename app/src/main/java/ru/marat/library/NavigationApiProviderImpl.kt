@@ -1,6 +1,7 @@
 package ru.marat.library
 
 import ru.marat.auth.AuthNavigationApiImpl
+import ru.marat.feature_book.BookNavigationApiImpl
 import ru.marat.feature_home.HomeNavigationApiImpl
 import ru.marat.feature_profile.ProfileNavigationApiImpl
 import ru.marat.feature_profile.SearchNavigationImpl
@@ -18,6 +19,7 @@ class NavigationApiProviderImpl: NavigationApiProvider {
             SettingsNavigationApiImpl(),
             ReaderNavigationApiImpl(),
             AuthNavigationApiImpl(),
+            BookNavigationApiImpl()
         )
     }
 }

@@ -18,6 +18,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.unit.dp
+import androidx.core.net.toUri
 import ru.marat.pdf_reader.layout.ReaderLayout
 import ru.marat.pdf_reader.layout.state.rememberReaderLayoutState
 
@@ -25,10 +26,9 @@ import ru.marat.pdf_reader.layout.state.rememberReaderLayoutState
 @Composable
 fun ReaderScreenUi(
     modifier: Modifier = Modifier,
-    uri: Uri
 ) {
     val readerState = rememberReaderLayoutState(
-        uri = uri,
+        uri = "".toUri(),
         minZoom = 0.4f,
         maxZoom = 20f
     )

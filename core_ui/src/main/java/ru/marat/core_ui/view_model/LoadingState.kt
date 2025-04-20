@@ -1,8 +1,18 @@
 package ru.marat.core_ui.view_model
 
-sealed interface LoadingState {
+import ru.marat.core_ui.view_model.LoadingState.Success
 
-    data class Success<T>(val data: T) : LoadingState
-    data object Loading : LoadingState
-    data class Error(val error: Throwable) : LoadingState
+sealed interface LoadingState<out T> {
+
+    data class Success<out T>(val data: T) : LoadingState<T>
+    data object Loading : LoadingState<Nothing>
+    data class Error(val error: Throwable) : LoadingState<Nothing>
+
+    val isLoading
+        get() = this is Loading
+    val isSuccess
+        get() = this is Success
+    fun dataOrNull(): T? {
+        return (this as? Success)?.data
+    }
 }
