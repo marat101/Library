@@ -92,7 +92,9 @@ fun HomeScreen(
                             imageUrl = book.imageUrl,
                             rating = 0f,
                             ratingState = ratingState,
-                            price = "Бесплатно",
+                            price = if(book.price == null)
+                                "Бесплатно"
+                            else "${book.price}\u20BD",
                             isFavorite = book.isFavorite,
                             onFavClick = {
                                 viewModel.onFavoriteClick(book.id)

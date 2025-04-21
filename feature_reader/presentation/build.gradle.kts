@@ -7,7 +7,7 @@ plugins {
 }
 
 android {
-    namespace = "ru.marat.feature_reader.impl"
+    namespace = "ru.marat.feature_reader.presentation"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     lint {
@@ -34,10 +34,7 @@ android {
 dependencies {
 
     implementation(projects.coreUi)
-    implementation(projects.coreDi)
-    implementation(projects.coreData.api)
     implementation(projects.featureReader.api)
-    implementation(projects.featureReader.presentation)
 
     implementation(libs.dagger)
     kapt(libs.dagger.compiler)

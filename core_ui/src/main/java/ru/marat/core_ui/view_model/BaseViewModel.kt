@@ -8,7 +8,7 @@ abstract class BaseViewModel: ViewModel() {
         return try {
             Result.success(block())
         } catch (e: Throwable) {
-            if (e !is CancellationException) e.printStackTrace() else throw e
+            if (e !is CancellationException) e.printStackTrace()
             Result.failure(e)
         }
     }
@@ -17,7 +17,7 @@ abstract class BaseViewModel: ViewModel() {
         return try {
             Result.success(block())
         } catch (e: Throwable) {
-            if (e !is CancellationException) e.printStackTrace() else throw e
+            if (e !is CancellationException) e.printStackTrace()
             Result.failure(e)
         }
     }

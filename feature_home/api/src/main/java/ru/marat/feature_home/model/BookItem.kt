@@ -4,5 +4,6 @@ data class BookItem(
     val name: String,
     val imageUrl: String,
     val isFavorite: Boolean,
-    val id: Long
+    val id: Long,
+    val price: Int? = null
 )

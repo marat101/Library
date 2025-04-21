@@ -12,7 +12,8 @@ class MainRepository( //todo
                 name = it.displayedName,
                 imageUrl = "$BASE_URL/preview?id=${it.id}&isLowQuality=true",
                 id = it.id,
-                isFavorite = it.isFavorite
+                isFavorite = it.isFavorite,
+                price = it.price
             )
         }
     }

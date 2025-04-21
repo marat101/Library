@@ -59,6 +59,7 @@ include(":feature_auth:presentation")
 
 include(":feature_reader:api")
 include(":feature_reader:impl")
+include(":feature_reader:presentation")
 
 include(":feature_book:api")
 include(":feature_book:impl")

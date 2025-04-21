@@ -52,6 +52,7 @@
             <option value="$PROJECT_DIR$/feature_reader" />
             <option value="$PROJECT_DIR$/feature_reader/api" />
             <option value="$PROJECT_DIR$/feature_reader/impl" />
+            <option value="$PROJECT_DIR$/feature_reader/presentation" />
             <option value="$PROJECT_DIR$/feature_root" />
             <option value="$PROJECT_DIR$/feature_root/api" />
             <option value="$PROJECT_DIR$/feature_root/impl" />

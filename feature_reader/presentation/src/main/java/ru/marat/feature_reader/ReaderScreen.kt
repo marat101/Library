@@ -1,6 +1,5 @@
-package ru.marat.feature_reader.presentation
+package ru.marat.feature_reader
 
-import android.net.Uri
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -15,6 +14,7 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clipToBounds
 import androidx.compose.ui.unit.dp
@@ -26,9 +26,11 @@ import ru.marat.pdf_reader.layout.state.rememberReaderLayoutState
 @Composable
 fun ReaderScreenUi(
     modifier: Modifier = Modifier,
+    viewModel: ReaderViewModel
 ) {
+    val state = viewModel.state.collectAsState()
     val readerState = rememberReaderLayoutState(
-        uri = "".toUri(),
+        uri = state.value.fileUri,
         minZoom = 0.4f,
         maxZoom = 20f
     )

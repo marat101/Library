@@ -9,8 +9,10 @@ import androidx.work.Data
 import androidx.work.ForegroundInfo
 import androidx.work.WorkerParameters
 import androidx.work.workDataOf
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
+import kotlinx.coroutines.withContext
 import ru.marat.core_data.FileManager
 import ru.marat.core_di.InjectUtils
 import ru.marat.feature_book.api.R
@@ -34,11 +36,11 @@ class DownloadBookWorker(
         .appDependencies<BookDependencies>()
         .provideFileManager()
 
-    override suspend fun doWork(): Result {
+    override suspend fun doWork(): Result = withContext(Dispatchers.IO) {
         val bookId = extractData()
         var file: File? = null
         semaphore.withPermit {
-            if (bookId == -1L) return Result.failure(
+            if (bookId == -1L) return@withContext Result.failure(
                 errorData(
                     id = bookId,
                     message = "Invalid params"
@@ -59,7 +61,7 @@ class DownloadBookWorker(
             }.onFailure {
                 it.printStackTrace()
                 fileManager.deleteBookFileById(bookId)
-                return Result.failure(
+                return@withContext Result.failure(
                     errorData(
                         id = bookId,
                         message = it.message ?: "Unknown error"
@@ -67,7 +69,7 @@ class DownloadBookWorker(
                 )
             }
         }
-        return Result.success(workDataOf(OUTPUT_FILE_KEY to file?.absolutePath))
+        return@withContext Result.success(workDataOf(OUTPUT_FILE_KEY to file?.absolutePath))
     }
 
 

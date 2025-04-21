@@ -43,5 +43,6 @@ class MainApi( //todo потом переделать
 data class BookResponse(
     val displayedName: String,
     val id: Long,
-    val isFavorite: Boolean
+    val isFavorite: Boolean,
+    val price: Int? = null
 )

@@ -24,7 +24,12 @@ data class AppColorScheme(
     val themeDisabled: Color,
     val themeButtonsBackground: Color,
 
-    val settingsCategory: Color
+    val settingsCategory: Color,
+
+    val ratingLine: Color,
+    val ratingLineBackground: Color,
+
+    val buttonBackBackground: Color,
 )
 
 val appLightColorScheme = AppColorScheme(
@@ -38,7 +43,10 @@ val appLightColorScheme = AppColorScheme(
     ripple = Color(0xFF000000),
     themeDisabled = Color(0xFF999999),
     themeButtonsBackground = Color(0xFFF1F0F0),
-    settingsCategory = Color(0xFF686868)
+    settingsCategory = Color(0xFF686868),
+    ratingLineBackground = Color.Gray.copy(0.5f),
+    ratingLine = Color.Gray,
+    buttonBackBackground = Color(0xfff3edf7)
 )
 
 val appDarkColorScheme = AppColorScheme(
@@ -52,7 +60,10 @@ val appDarkColorScheme = AppColorScheme(
     ripple = Color(0xFFFFFFFF),
     themeDisabled = Color(0xFF999999),
     themeButtonsBackground = Color(0xFF1A1D26),
-    settingsCategory = Color(0x99EBEBF5)
+    settingsCategory = Color(0x99EBEBF5),
+    ratingLineBackground = Color.Gray.copy(0.5f),
+    ratingLine = Color.White,
+    buttonBackBackground = Color(0xFF212026)
 )
 
 object AppTheme {

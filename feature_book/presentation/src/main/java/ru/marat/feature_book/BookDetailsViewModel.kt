@@ -41,20 +41,29 @@ class BookDetailsViewModel @AssistedInject constructor(
 
     fun loadBookInfo() {
         viewModelScope.launch(Dispatchers.IO) {
-            val book = async {
-                if (checkIfFileExists(bookId) != null) BookFile.Loaded
-                else BookFile.NotLoaded
-            }
-            val bookInfo = async { fetchBookInfo(bookId) }
-            withContext(Dispatchers.Main) {
-                _state.update {
-                    it.copy(
-                        book = book.await(),
-                        bookInfo = LoadingState.Success(bookInfo.await())
-                    )
+            appSuspendRunCatching {
+                val book = async {
+                    if (_state.value.book !is BookFile.Undefined) return@async _state.value.book
+                    if (checkIfFileExists(bookId) != null) BookFile.Loaded
+                    else BookFile.NotLoaded
                 }
+                val bookInfo = async {
+                    appSuspendRunCatching { LoadingState.Success(fetchBookInfo(bookId)) }.getOrElse {
+                        LoadingState.Error(it)
+                    }
+                }
+                withContext(Dispatchers.Main) {
+                    _state.update {
+                        it.copy(
+                            book = book.await(),
+                            bookInfo = bookInfo.await()
+                        )
+                    }
+                }
+                if (isDownloadingInProgress(bookId)) subscribeOnDownloadProgress()
+            }.onFailure { e ->
+                _state.update { it.copy(bookInfo = LoadingState.Error(e)) }
             }
-            if (isDownloadingInProgress(bookId)) subscribeOnDownloadProgress()
         }
     }
 
@@ -77,6 +86,10 @@ class BookDetailsViewModel @AssistedInject constructor(
         navigation.navigate(ReaderScreen(bookId)) { launchSingleTop = true }
     }
 
+    fun onBackClick() {
+        navigation.popBackStack()
+    }
+
     private suspend fun subscribeOnDownloadProgress() = coroutineScope {
         if (state.value.book is BookFile.Loading) return@coroutineScope
         appSuspendRunCatching {
@@ -87,8 +100,6 @@ class BookDetailsViewModel @AssistedInject constructor(
             }
         }.onFailure {
             _state.update { it.copy(book = BookFile.NotLoaded) }
-            println("DOWNLOADING FINISHED FAIL")
-            //todo
         }
     }
 
