@@ -20,10 +20,17 @@ fun bookViewModel(id: Long): BookDetailsViewModel {
         BookContainer().apply {
             DaggerBookComponent
                 .factory()
-                .create(InjectUtils.appDependencies<BookDependencies>())
-                .inject(this)
+                .create(
+                    id,
+                    InjectUtils.appDependencies<BookDependencies>()
+                ).inject(this)
         }
     }
 
-    return viewModel<BookDetailsViewModel>(factory = BookDetailsViewModel.create(id, container.viewModelFactory))
+    return viewModel<BookDetailsViewModel>(
+        factory = BookDetailsViewModel.create(
+            id,
+            container.viewModelFactory
+        )
+    )
 }

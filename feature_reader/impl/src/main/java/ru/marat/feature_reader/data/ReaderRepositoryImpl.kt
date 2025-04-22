@@ -7,7 +7,7 @@ import java.io.File
 class ReaderRepositoryImpl(
     private val fileManager: FileManager
 ): ReaderRepository {
-    override fun getBookFile(id: Long): File {
+    override suspend fun getBookFile(id: Long): File {
         return fileManager.getBookFileById(id)!!
     }
 }

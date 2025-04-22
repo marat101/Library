@@ -4,11 +4,11 @@ import java.io.File
 
 interface FileManager {
 
-    fun getBookFileById(id: Long): File?
+    suspend fun getBookFileById(id: Long): File?
 
-    fun createNewBookFile(bookId: Long,size: Long): File
+    suspend fun createNewBookFile(bookId: Long,size: Long): File
 
-    fun deleteBookFileById(id: Long)
+    suspend fun deleteBookFileById(id: Long)
 
-    fun deleteAll()
+    suspend fun deleteAll()
 }

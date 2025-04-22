@@ -39,9 +39,9 @@ import coil3.compose.AsyncImage
 import coil3.request.ImageRequest
 import ru.marat.core_ui.theme.AppTheme
 import ru.marat.feature_profile.api.R
-import ru.marat.feature_profile.presentation.components.DefaultAvatar
 import ru.marat.core_ui.components.app.profile_buttons.ProfileButton
 import ru.marat.core_ui.components.app.profile_buttons.ProfileButtonData
+import ru.marat.core_ui.components.common.DefaultAvatar
 import ru.marat.core_ui.components.common.calculateHorizontalPadding
 import ru.marat.feature_profile.di.profileViewModel
 import ru.marat.feature_settings.SettingsScreens
@@ -74,7 +74,7 @@ fun ProfileScreen(
         TopAppBar(
             title = {
                 Text(
-                    text = stringResource(R.string.top_app_bar_screen_title),
+                    text = stringResource(R.string.top_app_bar_profile_screen_title),
                     fontWeight = FontWeight.SemiBold
                 )
             },

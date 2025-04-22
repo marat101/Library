@@ -4,5 +4,5 @@ import java.io.File
 
 interface ReaderRepository {
 
-    fun getBookFile(id: Long): File
+    suspend fun getBookFile(id: Long): File
 }

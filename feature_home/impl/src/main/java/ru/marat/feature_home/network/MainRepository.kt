@@ -13,7 +13,8 @@ class MainRepository( //todo
                 imageUrl = "$BASE_URL/preview?id=${it.id}&isLowQuality=true",
                 id = it.id,
                 isFavorite = it.isFavorite,
-                price = it.price
+                price = it.price,
+                averageRating = it.averageRating()
             )
         }
     }

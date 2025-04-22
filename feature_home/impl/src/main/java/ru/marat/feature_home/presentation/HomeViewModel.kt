@@ -38,9 +38,7 @@ class HomeViewModel(
 
     fun addToFavorite(id: Long) {
         viewModelScope.launch {
-            val added = withContext(Dispatchers.IO) {
-                mainRepository.addToFavorite(id)
-            }
+            val added = withContext(Dispatchers.IO) { mainRepository.addToFavorite(id) }
             _state.update {
                 it.copy(
                     books = LoadingState.Success(

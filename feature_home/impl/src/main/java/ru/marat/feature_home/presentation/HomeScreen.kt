@@ -90,10 +90,10 @@ fun HomeScreen(
                             modifier = Modifier,
                             title = book.name,
                             imageUrl = book.imageUrl,
-                            rating = 0f,
+                            rating = book.averageRating,
                             ratingState = ratingState,
                             price = if(book.price == null)
-                                "Бесплатно"
+                                "Бесплатно" //todo res
                             else "${book.price}\u20BD",
                             isFavorite = book.isFavorite,
                             onFavClick = {

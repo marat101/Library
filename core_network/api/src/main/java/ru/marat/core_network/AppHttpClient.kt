@@ -23,7 +23,7 @@ interface AppAuthHttpClient {
     /** @param progress from 0.0(0%) to 1.0(100%) */
     suspend fun downloadFile(
         url: String,
-        onCreateFile: (totalFileSize: Long) -> File,
+        onCreateFile: suspend (totalFileSize: Long) -> File,
         progress: suspend (progress: Float) -> Unit
     )
 }

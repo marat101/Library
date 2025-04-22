@@ -33,6 +33,7 @@ android {
 dependencies {
 
     api(projects.coreNavigation)
+    implementation(projects.coreData.api)
 
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.kotlinx.datetime)

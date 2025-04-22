@@ -2,7 +2,6 @@ package ru.marat.core_data
 
 import android.content.Context
 import kotlinx.serialization.Serializable
-import kotlinx.serialization.encodeToString
 import kotlinx.serialization.json.Json
 import java.io.File
 
@@ -16,7 +15,7 @@ class FileManagerImpl(
         directory.mkdirs()
     }
 
-    override fun getBookFileById(id: Long): File? {
+    override suspend fun getBookFileById(id: Long): File? {
         val bookDir = File(directory, "$id")
         if (!bookDir.exists()) return null
         val bookFile = File(bookDir, "book.pdf")
@@ -30,7 +29,7 @@ class FileManagerImpl(
         return bookFile
     }
 
-    override fun createNewBookFile(bookId: Long, size: Long): File {
+    override suspend fun createNewBookFile(bookId: Long, size: Long): File {
         val bookDir = File(directory, "$bookId")
         if (!bookDir.exists()) bookDir.mkdirs()
         File(bookDir, "metadata.json").apply {
@@ -49,11 +48,11 @@ class FileManagerImpl(
         return bookFile
     }
 
-    override fun deleteBookFileById(id: Long) {
+    override suspend fun deleteBookFileById(id: Long) {
         File(directory, "$id").deleteRecursively()
     }
 
-    override fun deleteAll() {
+    override suspend fun deleteAll() {
         directory.deleteRecursively()
     }
 

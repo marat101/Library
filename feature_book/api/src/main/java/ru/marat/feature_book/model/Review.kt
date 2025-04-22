@@ -1,11 +1,12 @@
 package ru.marat.feature_book.model
 
-import java.time.Instant
+import kotlinx.datetime.Instant
+
 
 data class Review(
     val name: String,
-    val text: String,
-    val grade: Int,
+    val text: String? = null,
+    val rating: Int,
     val date: Instant,
-    val imageUrl: String? = null,
+    val avatarUrl: String,
 )

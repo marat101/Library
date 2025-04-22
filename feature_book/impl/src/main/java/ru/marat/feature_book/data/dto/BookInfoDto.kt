@@ -8,5 +8,6 @@ data class BookInfoDto(
     val displayedName: String,
     val description: String,
     val isFavorite: Boolean,
-    val rating: RatingDto
+    val rating: RatingDto,
+    val price: Int? = null,
 )

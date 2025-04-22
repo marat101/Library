@@ -6,5 +6,6 @@ data class BookInfo(
     val description: String,
     val imageUrl: String,
     val isFavorite: Boolean,
-    val rating: Rating
+    val rating: Rating,
+    val price: Int? = null,
 )

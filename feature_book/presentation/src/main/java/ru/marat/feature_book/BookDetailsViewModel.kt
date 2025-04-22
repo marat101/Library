@@ -3,6 +3,8 @@ package ru.marat.feature_book
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
+import androidx.paging.Pager
+import androidx.paging.cachedIn
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -18,6 +20,7 @@ import kotlinx.coroutines.withContext
 import ru.marat.core_ui.view_model.BaseViewModel
 import ru.marat.core_ui.view_model.LoadingState
 import ru.marat.feature_book.model.BookFile
+import ru.marat.feature_book.model.Review
 import ru.marat.feature_book.use_cases.CancelDownloadBookUseCase
 import ru.marat.feature_book.use_cases.CheckIfDownloadingInProgressUseCase
 import ru.marat.feature_book.use_cases.CheckIfFileExistsUseCase
@@ -28,6 +31,7 @@ import ru.marat.navigation_api.AppNavController
 
 class BookDetailsViewModel @AssistedInject constructor(
     private val navigation: AppNavController,
+    reviewsPager: Pager<Int, Review>,
     private val fetchBookInfo: FetchBookInfoUseCase,
     private val downloadBook: DownloadBookUseCase,
     private val checkIfFileExists: CheckIfFileExistsUseCase,
@@ -38,6 +42,8 @@ class BookDetailsViewModel @AssistedInject constructor(
 
     private val _state = MutableStateFlow(BookDetailState())
     val state = _state.asStateFlow()
+
+    val reviews = reviewsPager.flow.cachedIn(viewModelScope)
 
     fun loadBookInfo() {
         viewModelScope.launch(Dispatchers.IO) {

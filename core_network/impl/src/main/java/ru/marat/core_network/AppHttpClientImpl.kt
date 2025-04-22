@@ -62,7 +62,7 @@ class AppAuthHttpClientImpl(
 
     override suspend fun downloadFile(
         url: String,
-        onCreateFile: (totalFileSize: Long) -> File,
+        onCreateFile: suspend (totalFileSize: Long) -> File,
         progress: suspend (Float) -> Unit
     ) = coroutineScope {
         client.prepareGet(

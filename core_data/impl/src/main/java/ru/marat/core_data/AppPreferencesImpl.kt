@@ -12,10 +12,12 @@ class AppPreferencesImpl(
     private val sharedPrefs = context.getSharedPreferences("library_preferences", Context.MODE_PRIVATE)
 
     override fun get(key: String): String? {
-        return sharedPrefs.getString(key, null)
+        val result = sharedPrefs.getString(key, null)
+        if (result == "null") return null
+        return result
     }
 
     override operator fun set(key: String, value: Any?) {
-        sharedPrefs.edit().putString(key, value.toString()).commit()
+        sharedPrefs.edit().putString(key, value?.toString()).commit()
     }
 }

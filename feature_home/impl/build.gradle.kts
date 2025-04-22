@@ -31,6 +31,7 @@ dependencies {
 
     implementation(projects.coreDi)
     implementation(projects.coreUi)
+    implementation(projects.coreData.api)
     implementation(projects.coreNetwork.api)
     implementation(projects.featureHome.api)
     implementation(projects.featureSearch.api)

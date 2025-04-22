@@ -90,13 +90,13 @@ fun Lines(
     modifier: Modifier = Modifier,
     rating: Rating,
 ) {
-    val lineColor = AppTheme.colorScheme.ratingLine
+    val lineColor = MaterialTheme.colorScheme.primary
     val lineBackgroundColor = AppTheme.colorScheme.ratingLineBackground
 
     Column(
         modifier = modifier,
     ) {
-        repeat(5) {
+        for (it in intArrayOf(4,3,2,1,0)) {
             val count = when (it) {
                 0 -> rating.star1
                 1 -> rating.star2

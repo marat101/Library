@@ -22,7 +22,7 @@ class BookApi(
 
     suspend fun downloadBook(
         id: Long,
-        onCreateFile: (totalFileSize: Long) -> File,
+        onCreateFile: suspend (totalFileSize: Long) -> File,
         onProgress: suspend (Float) -> Unit
     ) {
         var fileSize: Long = 0
@@ -31,8 +31,7 @@ class BookApi(
             url = "${BuildConfig.API_URL}/downloadBook?id=$id",
             onCreateFile = {
                 fileSize = it
-                val mfile = onCreateFile(it)
-                file = mfile
+                file = onCreateFile(it)
                 file
             },
             progress = onProgress

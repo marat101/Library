@@ -39,6 +39,8 @@ import androidx.compose.ui.unit.sp
 import coil3.compose.AsyncImage
 import coil3.compose.rememberAsyncImagePainter
 import coil3.request.ImageRequest
+import coil3.request.crossfade
+import ru.marat.core_ui.components.common.ErrorPlaceHolder
 import ru.marat.core_ui.components.common.Rating
 import ru.marat.core_ui.components.common.RatingState
 import ru.marat.core_ui.components.common.rememberRatingState
@@ -78,15 +80,13 @@ fun GridBookItem(
                 .background(Color.LightGray)
         ) {
            val context = LocalContext.current
-//            val painter = rememberAsyncImagePainter(
-//
-//            )
             AsyncImage(
                 modifier = Modifier.fillMaxSize(),
                 model = ImageRequest.Builder(context)
                     .data(imageUrl)
+                    .crossfade(true)
+                    .error { ErrorPlaceHolder }
                     .listener(
-                        onStart = {},
                         onError = { result, error ->
                             error.throwable.printStackTrace()
                     })
@@ -101,7 +101,6 @@ fun GridBookItem(
                 isFavorite = isFavorite,
                 onFavoriteClick = onFavClick
             )
-            // todo image
         }
 
         Column(

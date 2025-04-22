@@ -29,10 +29,11 @@ fun ReaderScreenUi(
     viewModel: ReaderViewModel
 ) {
     val state = viewModel.state.collectAsState()
+    val uri = state.value.fileUri ?: return
     val readerState = rememberReaderLayoutState(
-        uri = state.value.fileUri,
+        uri = uri,
         minZoom = 0.4f,
-        maxZoom = 20f
+        maxZoom = 30f
     )
     Column(
         modifier =

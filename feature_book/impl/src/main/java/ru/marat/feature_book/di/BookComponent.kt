@@ -1,9 +1,11 @@
 package ru.marat.feature_book.di
 
+import dagger.BindsInstance
 import dagger.Component
 import ru.marat.feature_book.di.modules.BookModule
 import ru.marat.feature_book.di.modules.BookViewModelsModule
 import ru.marat.feature_book.di.modules.UseCasesModule
+import javax.inject.Named
 import javax.inject.Scope
 
 
@@ -24,7 +26,10 @@ interface BookComponent {
 
     @Component.Factory
     interface Factory {
-        fun create(dependencies: BookDependencies): BookComponent
+        fun create(
+            @BindsInstance @Named("bookId") bookId: Long,
+            dependencies: BookDependencies
+        ): BookComponent
     }
 
     fun inject(target: BookContainer)

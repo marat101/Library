@@ -1,4 +1,4 @@
-package ru.marat.feature_profile.presentation.components
+package ru.marat.core_ui.components.common
 
 import android.content.Context
 import android.graphics.Paint

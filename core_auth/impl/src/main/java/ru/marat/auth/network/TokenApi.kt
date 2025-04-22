@@ -5,6 +5,8 @@ import io.ktor.client.request.setBody
 import io.ktor.http.ContentType
 import io.ktor.http.HttpMethod
 import io.ktor.http.contentType
+import kotlinx.datetime.DateTimeUnit
+import kotlinx.datetime.plus
 import kotlinx.datetime.toJavaInstant
 import kotlinx.datetime.toKotlinInstant
 import kotlinx.serialization.json.JsonObject
@@ -14,6 +16,7 @@ import ru.marat.core_auth.api.BuildConfig
 import ru.marat.core_network.AppHttpClient
 import java.time.ZoneId
 import java.util.Locale
+import kotlin.time.DurationUnit
 
 class TokenApi(
     private val client: AppHttpClient,
@@ -24,9 +27,7 @@ class TokenApi(
             contentType(ContentType.Application.Json)
             setBody(JsonObject(mapOf("token" to JsonPrimitive(refreshToken))))
         }.body<TokensDto>()
-        val zonedDateTime = response.expireIn.toJavaInstant().atZone(ZoneId.systemDefault())
-        return response.copy(
-            expireIn = zonedDateTime.toInstant().toKotlinInstant()
-        )
+
+        return response
     }
 }

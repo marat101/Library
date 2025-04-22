@@ -3,7 +3,9 @@ package ru.marat.feature_book
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
@@ -39,8 +41,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.paging.LoadState
+import androidx.paging.PagingData
+import androidx.paging.compose.collectAsLazyPagingItems
 import ru.marat.core_ui.theme.AppTheme
 import ru.marat.feature_book.components.BookDescription
+import ru.marat.feature_book.components.Comment
 import ru.marat.feature_book.components.CommonRating
 import ru.marat.feature_book.components.PreviewImageWithBackground
 import ru.marat.feature_book.components.StateLayouts
@@ -54,7 +60,7 @@ fun BookDetailScreen(
     viewModel: BookDetailsViewModel
 ) {
     val state = viewModel.state.collectAsState()
-
+    val reviews = viewModel.reviews.collectAsLazyPagingItems()
     Box(
         modifier = modifier
             .fillMaxSize()
@@ -179,6 +185,69 @@ fun BookDetailScreen(
                     rating = state.value.bookInfo.dataOrNull()?.rating!!
                 )
             }
+            item {
+                reviews.retry() //todo
+            }
+            items(reviews.itemCount) { index ->
+                reviews[index]?.let { review ->
+                    Comment(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(MaterialTheme.colorScheme.background)
+                            .padding(16.dp),
+                        review = review
+                    )
+                }
+            }
+            when {
+                reviews.loadState.append is LoadState.Loading ||
+                        reviews.loadState.refresh is LoadState.Loading -> {
+                    item {
+                        Box(
+                            Modifier
+                                .fillMaxWidth()
+                                .height(60.dp),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            CircularProgressIndicator()
+                        }
+                    }
+                }
+
+                reviews.loadState.append is LoadState.Error -> { //todo res
+                    item {
+                        Column(
+                            Modifier
+                                .fillMaxWidth()
+                                .height(70.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text("Ошибка загрузки")
+                            Button(onClick = reviews::retry) {
+                                Text("Повторить")
+                            }
+                        }
+                    }
+                }
+
+                reviews.loadState.refresh is LoadState.Error -> {
+                    item {
+                        Column(
+                            Modifier
+                                .fillMaxWidth()
+                                .height(70.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            verticalArrangement = Arrangement.spacedBy(4.dp)
+                        ) {
+                            Text("Ошибка загрузки")
+                            Button(onClick = reviews::retry) {
+                                Text("Повторить")
+                            }
+                        }
+                    }
+                }
+            }
         }
         val btnShape = RoundedCornerShape(10.dp)
         Box(
@@ -195,7 +264,7 @@ fun BookDetailScreen(
                     onClick = viewModel::onBackClick
                 ),
             contentAlignment = Alignment.Center,
-        ){
+        ) {
             val theme = LocalTheme.current
             Icon(
                 imageVector = Icons.AutoMirrored.Filled.ArrowBack,
@@ -208,7 +277,7 @@ fun BookDetailScreen(
 
     DisposableEffect(Unit) {
         viewModel.loadBookInfo()
-        onDispose { }
+        onDispose {}
     }
 }
 
